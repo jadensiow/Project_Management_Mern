@@ -1,0 +1,22 @@
+{
+  "name": "project-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server",
+    "client": "npm start --prefix client"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "gravatar": "^1.8.1",
+    "mongoose": "^5.12.3",
+    "nodemon": "^2.0.7"
+  }
+}
