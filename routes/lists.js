@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User");
+const List = require("../models/List");
 
 router.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Hello boards");
 });
 
 module.exports = router;
