@@ -9,6 +9,7 @@ app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: false }));
 
 // Connect database
+// testing
 (async function connectDB() {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
