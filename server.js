@@ -4,6 +4,10 @@ require("dotenv").config();
 
 const app = express();
 
+// Import Routes
+const authController = require("./routes/auth");
+const usersController = require("./routes/users");
+
 // Middleware
 app.use(express.json({ extended: false }));
 app.use(express.urlencoded({ extended: false }));
@@ -20,14 +24,9 @@ mongoose.connection.once("open", () => {
   console.log("XXXXXXXXXXXXXX Connected to mongoose...");
 });
 
-// Import Routes
-const usersController = require("./routes/users");
-const authController = require("./routes/auth");
-const boardController = require("./routes/boards");
 // Routes
 app.use("/api/users", usersController);
 app.use("/api/auth", authController);
-app.use("/api/board", boardController);
 
 const PORT = process.env.PORT || 5001;
 

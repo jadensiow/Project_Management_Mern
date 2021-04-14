@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const UserSchema = new Schema({
   name: {
@@ -17,12 +17,6 @@ const UserSchema = new Schema({
   avatar: {
     type: String,
   },
-  boards: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Board",
-    },
-  ],
 });
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = User = model("user", UserSchema);
