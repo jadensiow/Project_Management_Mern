@@ -6,7 +6,6 @@ module.exports = function (req, res, next) {
   // https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
   // standard way of testing for authentication
   const token = req.header("Authorization");
-
   // Check if no token
   if (!token) {
     return res.status(401).json({ msg: "No token, authorization denied" });

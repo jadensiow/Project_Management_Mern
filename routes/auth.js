@@ -9,8 +9,11 @@ require("dotenv").config();
 const User = require("../models/User");
 
 // Get authorized user
+
+// https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
 router.get("/", auth, async (req, res) => {
   try {
+    // get everything except password
     const user = await User.findById(req.user.id).select("-password");
     res.json(user);
   } catch (err) {
