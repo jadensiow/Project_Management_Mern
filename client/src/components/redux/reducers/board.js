@@ -23,6 +23,7 @@ import {
   EDIT_CHECKLIST_ITEM,
   COMPLETE_CHECKLIST_ITEM,
   DELETE_CHECKLIST_ITEM,
+  RAND_IMG,
 } from "../action/types";
 
 const initialState = {
@@ -47,6 +48,8 @@ export default function (state = initialState, action) {
         boards: payload,
         dashboardLoading: false,
       };
+
+    case RAND_IMG:
     case RENAME_BOARD:
     case GET_BOARD:
       return {

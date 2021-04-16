@@ -99,6 +99,23 @@ router.get("/activity/:boardId", auth, async (req, res) => {
   }
 });
 
+// change board backgorund
+router.patch("/background/:id", auth, async (req, res) => {
+  try {
+    const board = await Board.findById(req.params.id);
+    if (!board) {
+      return res.status(404).json({ msg: "Error with images" });
+    }
+    board.backgroundURL = req.body.randImg;
+
+    await board.save();
+    res.json(board);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Image Error");
+  }
+});
+
 // Change a board's title
 router.patch(
   "/rename/:id",

@@ -17,6 +17,7 @@ export const RENAME_BOARD = "RENAME_BOARD";
 export const GET_LIST = "GET_LIST";
 export const ADD_LIST = "ADD_LIST";
 export const RENAME_LIST = "RENAME_LIST";
+export const RAND_IMG = "RAND_IMG";
 
 export const ARCHIVE_LIST = "ARCHIVE_LIST";
 export const GET_CARD = "GET_CARD";

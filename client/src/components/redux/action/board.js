@@ -25,6 +25,7 @@ import {
   EDIT_CHECKLIST_ITEM,
   COMPLETE_CHECKLIST_ITEM,
   DELETE_CHECKLIST_ITEM,
+  RAND_IMG,
 } from "./types";
 
 const config = {
@@ -94,6 +95,28 @@ export const addBoard = (formData, history) => async (dispatch) => {
     dispatch({
       type: BOARD_ERROR,
       payload: { msg: err.response.statusText },
+    });
+  }
+};
+// Random background board
+export const randImgBoard = (boardId, formData) => async (dispatch) => {
+  try {
+    const body = JSON.stringify(formData);
+
+    const res = await axios.patch(
+      `/api/boards/background/${boardId}`,
+      body,
+      config
+    );
+
+    dispatch({
+      type: RAND_IMG,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: BOARD_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };

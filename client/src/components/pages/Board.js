@@ -9,6 +9,7 @@ import List from "../list/List";
 import CreateList from "../board/CreateList";
 import Members from "../board/Members";
 import Navbar from "../functions/Navbar";
+import BackgroundButton from "../functions/BackgroundButton";
 
 const Board = ({ match }) => {
   const board = useSelector((state) => state.board.board);
@@ -63,6 +64,7 @@ const Board = ({ match }) => {
     >
       <Navbar />
       <section className="board">
+        <BackgroundButton board={board} />
         <div className="board-top">
           <div className="board-top-left">
             <BoardTitle board={board} />
