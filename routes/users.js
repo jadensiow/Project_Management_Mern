@@ -17,14 +17,13 @@ const User = require("../models/User");
 router.post(
   "/",
   [
-    check("name", "Kindly indicate your name").not().isEmpty(),
+    check("name", "Name is required").not().isEmpty(),
     check("email", "Please include a valid email").isEmail(),
     check(
       "password",
-      "Please enter a password between 6 to 20 characters"
+      "Please enter a password with 6 or more characters"
     ).isLength({
       min: 6,
-      max: 20,
     }),
   ],
   async (req, res) => {
@@ -44,19 +43,16 @@ router.post(
       }
 
       // Register new user
-
-      // s= size (200 x 200) r= rating
-      //https://en.gravatar.com/site/implement/images/#default-image
       const user = new User({
         name,
         email,
-        avatar: gravatar.url(email, { s: "200", r: "pg", d: "wavatar" }),
-        password: await bcrypt.hashSync(password, bcrypt.genSaltSync(10)),
+        avatar: gravatar.url(email, { s: "200", r: "pg", d: "mm" }),
+        password: await bcrypt.hash(password, await bcrypt.genSalt(10)),
       });
 
       await user.save();
 
-      // Generating access token
+      // Return jsonwebtoken
       jwt.sign(
         {
           user: {
@@ -67,8 +63,6 @@ router.post(
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
-
-          // Generate new access token based on refresh
           res.json({ token });
         }
       );
@@ -82,13 +76,12 @@ router.post(
 // Get users with email regex
 router.get("/:input", auth, async (req, res) => {
   try {
-    // i for case insensitive andd for matching
     const regex = new RegExp(req.params.input, "i");
-    const user = await User.find({
+    const users = await User.find({
       email: regex,
     }).select("-password");
 
-    res.json(user.filter((user) => user.id !== req.user.id));
+    res.json(users.filter((user) => user.id !== req.user.id));
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

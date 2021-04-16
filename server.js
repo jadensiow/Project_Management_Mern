@@ -34,6 +34,6 @@ app.use("/api/boards", boardsController);
 app.use("/api/cards", cardsController);
 app.use("/api/lists", listsController);
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log("Server running on port:" + PORT));

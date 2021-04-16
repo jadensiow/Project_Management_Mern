@@ -5,7 +5,6 @@ import { Button } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { FiberPin } from "@material-ui/icons";
 const Main = () => {
   // data retrieve from the overall state which is the store and data are updated over at reducer // which is like maping of state to props ==> Refer to reducers/index
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);

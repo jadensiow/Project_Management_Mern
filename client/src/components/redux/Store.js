@@ -12,10 +12,10 @@ const initialState = {};
 // added thunk so can delay dispatch of action until certain conddition met
 const middleWare = [thunk];
 
-const Store = createStore(
+const store = createStore(
   rootReducer,
   initialState,
   composeWithDevTools(applyMiddleware(...middleWare))
 );
 
-export default Store;
+export default store;

@@ -3,21 +3,19 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const auth = require("../middleware/auth_Middleware");
 const jwt = require("jsonwebtoken");
-const { check } = require("express-validator");
+const { check, validationResult } = require("express-validator");
 require("dotenv").config();
 
 const User = require("../models/User");
 
 // Get authorized user
-
-// https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
 router.get("/", auth, async (req, res) => {
   try {
-    // get everything except password
     const user = await User.findById(req.user.id).select("-password");
     res.json(user);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server error");
   }
 });
 
@@ -29,31 +27,31 @@ router.post(
     check("password", "Password is required").exists(),
   ],
   async (req, res) => {
-    // https://stackabuse.com/authentication-and-authorization-with-jwts-in-express-js/
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
     const { email, password } = req.body;
 
     try {
-      // See if email exists from the database
-      let user = await User.find((e) => {
-        return e.email === email;
-      });
-
+      // See if user exists
+      let user = await User.findOne({ email });
       if (!user) {
-        return res.status(404).json({
-          errors: [{ msg: "Email not registered" }],
+        return res.status(400).json({
+          errors: [{ msg: "Invalid credentials" }],
         });
       }
 
       // Check for email and password match
-      const matchPwEmail = await bcrypt.compare(password, user.password);
-      if (!matchPwEmail) {
-        return res.status(404).json({
-          errors: [{ msg: "Incorrect password" }],
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).json({
+          errors: [{ msg: "Invalid credentials" }],
         });
       }
 
-      // Generating access token
+      // Return jsonwebtoken
       jwt.sign(
         {
           user: {
@@ -61,11 +59,9 @@ router.post(
           },
         },
         process.env.JWT_SECRET,
-        { expiresIn: "20m" },
+        { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
-
-          // Generate new access token based on refresh
           res.json({ token });
         }
       );
