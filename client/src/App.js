@@ -15,6 +15,9 @@ import { loadUser } from "./components/redux/action/auth";
 // Redux
 import { Provider } from "react-redux";
 import store from "./components/redux/Store";
+
+import "./App.css";
+
 // check for token in local
 if (localStorage.token) {
   AuthToken(localStorage.token);
