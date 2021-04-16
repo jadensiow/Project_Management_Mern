@@ -70,7 +70,7 @@ export const getBoard = (id) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err.response },
     });
   }
 };
@@ -93,7 +93,7 @@ export const addBoard = (formData, history) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err.response.statusText },
     });
   }
 };

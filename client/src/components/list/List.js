@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { getList } from "../redux/action/board";
 import ListTitle from "./ListTitle";
+import ListMenu from "./ListMenu";
+
 import Card from "../card/Card";
 import CreateCardForm from "../card/CreateCardForm";
 import Button from "@material-ui/core/Button";
@@ -37,6 +39,7 @@ const List = ({ listId, index }) => {
         >
           <div className="list-top">
             <ListTitle list={list} />
+            <ListMenu listId={listId} />
           </div>
           <Droppable droppableId={listId} type="card">
             {(provided) => (
