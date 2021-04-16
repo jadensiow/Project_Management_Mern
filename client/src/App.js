@@ -6,6 +6,8 @@ import Main from "./components/pages/Main";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Dashboard from "./components/pages/Dashboard";
+import Alert from "./components/functions/alert";
+import Board from "./components/pages/Board";
 
 // Token
 import AuthToken from "./components/functions/AuthToken";
@@ -20,7 +22,7 @@ if (localStorage.token) {
 
 const App = () => {
   useEffect(() => {
-    store.dispatch(loadUser()); // to trigger action => dispatch (Action)
+    store.dispatch(loadUser());
   }, []);
 
   // Store is to provide data to all level wrap in it
@@ -28,11 +30,13 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <>
+          <Alert />
           <Switch>
             <Route exact path="/" component={Main} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/board/:id" component={Board} />
           </Switch>
         </>
       </Router>

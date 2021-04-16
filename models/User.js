@@ -17,6 +17,12 @@ const UserSchema = new Schema({
   avatar: {
     type: String,
   },
+  boards: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "boards",
+    },
+  ],
 });
 
 module.exports = User = model("user", UserSchema);

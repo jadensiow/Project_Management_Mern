@@ -2,6 +2,8 @@ import { SET_ALERT, REMOVE_ALERT } from "../action/types";
 
 const initialState = [];
 
+// https://jackmckew.dev/actions-and-reducers-in-react-redux.html
+
 export default function (state = initialState, action) {
   const { type, payload } = action;
 

@@ -2,44 +2,48 @@
 
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+
+// Redux
 import { setAlert } from "../redux/action/alert";
 import { register } from "../redux/action/auth";
+import { useSelector, useDispatch } from "react-redux";
 
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+// Material UI
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 const Register = () => {
+  // Tab title
+  useEffect(() => {
+    document.title = "Registration";
+  }, []);
+
   // start form as empty
-  const [formData, setFormData] = useState({
-    name: "",
+  const [registration, setRegistration] = useState({
+    FullName: "",
     email: "",
     password: "",
-    password2: "",
+    cfmPassword: "",
   });
 
   // same thing to get selector data from the overall reducer
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    document.title = "Project Management | Sign Up";
-  }, []);
-
-  const { name, email, password, password2 } = formData;
+  const { name, email, password, cfmPassword } = registration;
 
   const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setRegistration({ ...registration, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (password !== password2) {
+    if (password !== cfmPassword) {
       // get setAlert from actions which is store in the redux store
       dispatch(setAlert("Passwords do not match", "error"));
     } else {
@@ -105,16 +109,16 @@ const Register = () => {
                 variant="outlined"
                 required
                 fullWidth
-                name="password2"
+                name="cfmPassword"
                 label="Confirm Password"
                 type="password"
-                value={password2}
+                value={cfmPassword}
                 onChange={(e) => onChange(e)}
               />
             </Grid>
           </Grid>
           <Button type="submit" fullWidth variant="contained" color="primary">
-            Sign Up
+            Register
           </Button>
           <Grid container justify="flex-end">
             <Grid item>

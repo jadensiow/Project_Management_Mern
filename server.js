@@ -7,6 +7,9 @@ const app = express();
 // Import Routes
 const authController = require("./routes/auth");
 const usersController = require("./routes/users");
+const boardsController = require("./routes/boards");
+const cardsController = require("./routes/cards");
+const listsController = require("./routes/lists");
 
 // Middleware
 app.use(express.json({ extended: false }));
@@ -27,6 +30,9 @@ mongoose.connection.once("open", () => {
 // Routes
 app.use("/api/users", usersController);
 app.use("/api/auth", authController);
+app.use("/api/boards", boardsController);
+app.use("/api/cards", cardsController);
+app.use("/api/lists", listsController);
 
 const PORT = process.env.PORT || 5001;
 

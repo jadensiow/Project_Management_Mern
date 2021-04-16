@@ -15,6 +15,10 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
 const Login = () => {
+  useEffect(() => {
+    document.title = "Login";
+  }, []);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,10 +27,6 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const { email, password } = formData;
-
-  useEffect(() => {
-    document.title = "Project Management | Sign In";
-  }, []);
 
   // to enable both to be typed
   const onChange = (e) =>
