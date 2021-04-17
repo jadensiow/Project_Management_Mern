@@ -7,7 +7,10 @@ const { check, validationResult } = require("express-validator");
 const User = require("../models/User");
 const Board = require("../models/Board");
 const List = require("../models/List");
+var cors = require("cors");
+var app = express();
 
+app.use(cors());
 // Add a list
 router.post(
   "/",

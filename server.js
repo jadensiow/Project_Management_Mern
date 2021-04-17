@@ -1,8 +1,14 @@
 const express = require("express");
-const mongoose = require("mongoose");
 require("dotenv").config();
-
 const app = express();
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+const mongoose = require("mongoose");
+const PORT = process.env.PORT || 5000;
+
+var cors = require("cors");
+
+app.use(cors());
 
 // Import Routes
 const authController = require("./routes/auth");
@@ -34,6 +40,51 @@ app.use("/api/boards", boardsController);
 app.use("/api/cards", cardsController);
 app.use("/api/lists", listsController);
 
-const PORT = process.env.PORT || 5000;
+let users = {};
+io.on("connection", (socket) => {
+  console.log("socket connected: " + socket.id);
+  // socket io will link back to their own room of socket id
+  socket.on("userJoin", (username) => {
+    users[socket.id] = username;
+    socket.join(username);
+    socket.join("General");
+    console.log("Users connected: " + users);
+    // filter out duplicate by spreading it out and set
+    io.emit("listOfUsers", [...new Set(Object.values(users))]);
+  });
 
-app.listen(PORT, () => console.log("Server running on port:" + PORT));
+  // Message sent thus here receive
+  socket.on("newMessage", (newMessage) => {
+    // forward message to connected client
+    // and only link it up to the same room name
+    console.log(newMessage);
+    io.to(newMessage.room).emit("newMessage", {
+      name: newMessage.name,
+      msg: newMessage.msg,
+      isPM: newMessage.isPM,
+    });
+  });
+
+  // message for entering room and leaving
+  socket.on("roomEntered", ({ oldRoom, newRoom }) => {
+    socket.leave(oldRoom);
+    io.to(oldRoom).emit("newMessage", {
+      name: "Notice",
+      msg: `${users[socket.id]} has just left the room`,
+    });
+    io.to(newRoom).emit("newMessage", {
+      name: "Notice",
+      msg: `${users[socket.id]} has just joined the room`,
+    });
+    socket.join(newRoom);
+  });
+
+  socket.on("disconnect", () => {
+    delete users[socket.id];
+    io.emit("listOfUsers", [...new Set(Object.values(users))]);
+
+    console.log("Users left: " + users[socket.id]);
+  });
+});
+
+server.listen(PORT, () => console.log("Server running on port:" + PORT));

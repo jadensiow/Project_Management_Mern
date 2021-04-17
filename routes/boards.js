@@ -8,6 +8,10 @@ const { check, validationResult } = require("express-validator");
 const User = require("../models/User");
 const Board = require("../models/Board");
 
+var cors = require("cors");
+var app = express();
+
+app.use(cors());
 // Add a board
 router.post(
   "/",

@@ -1,5 +1,11 @@
 const Board = require("../models/Board");
 
+var express = require("express");
+var cors = require("cors");
+var app = express();
+
+app.use(cors());
+
 module.exports = async function (req, res, next) {
   const board = await Board.findById(req.header("boardId"));
   if (!board) {

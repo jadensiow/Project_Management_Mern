@@ -1,5 +1,10 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+var express = require("express");
+var cors = require("cors");
+var app = express();
+
+app.use(cors());
 
 module.exports = function (req, res, next) {
   // Get token from header

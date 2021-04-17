@@ -4,6 +4,10 @@ const bcrypt = require("bcryptjs");
 const auth = require("../middleware/auth_Middleware");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
+var cors = require("cors");
+var app = express();
+
+app.use(cors());
 require("dotenv").config();
 
 const User = require("../models/User");

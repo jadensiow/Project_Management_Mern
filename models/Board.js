@@ -1,4 +1,9 @@
 const { Schema, model } = require("mongoose");
+var express = require("express");
+var cors = require("cors");
+var app = express();
+
+app.use(cors());
 
 const BoardSchema = new Schema(
   {

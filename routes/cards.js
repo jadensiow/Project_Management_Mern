@@ -9,7 +9,10 @@ const User = require("../models/User");
 const Board = require("../models/Board");
 const List = require("../models/List");
 const Card = require("../models/Card");
+var cors = require("cors");
+var app = express();
 
+app.use(cors());
 // Add a card
 router.post(
   "/",
