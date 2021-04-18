@@ -234,7 +234,10 @@ export const getCard = (id) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: {
+        msg: err?.response?.statusText,
+        status: err?.response?.status,
+      },
     });
   }
 };

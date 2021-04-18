@@ -17,6 +17,7 @@ import {
   Avatar,
   Tooltip,
 } from "@material-ui/core";
+import { format } from "date-fns";
 
 const Card = ({ cardId, list, index }) => {
   const [editing, setEditing] = useState(false);
@@ -29,7 +30,11 @@ const Card = ({ cardId, list, index }) => {
   const card = useSelector((state) =>
     state.board.board.cardObjects.find((object) => object._id === cardId)
   );
-
+  const dateFormat = (e) => {
+    let newDate = e.split("-");
+    let updatedDate = `${newDate[2].slice(0, 2)}-${newDate[1]}-${newDate[0]}`;
+    return updatedDate;
+  };
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -102,8 +107,9 @@ const Card = ({ cardId, list, index }) => {
                   />
                 )}
                 <p>{card.title}</p>
-                <p>Start: {card.date.startDate}</p>
-                <p>End:: {card.date.endDate}</p>
+                <p>Start: {dateFormat(card.date.startDate)}</p>
+                <p>End: {dateFormat(card.date.endDate)}</p>
+
                 <div className="card-bottom">
                   <div className="card-bottom-left">
                     {card.description && (

@@ -4,7 +4,7 @@ import { useState } from "react";
 import CloseIcon from "@material-ui/icons/Close";
 import { DateRangePicker } from "react-date-range";
 import { Button } from "@material-ui/core";
-
+import { format } from "date-fns";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 const CalendarPopUp = (props) => {
