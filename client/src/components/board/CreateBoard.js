@@ -4,12 +4,13 @@ import { withRouter } from "react-router-dom";
 import { addBoard } from "../redux/action/board";
 import { Modal, TextField, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-//import useStyles from "../styles/modalStyles";
+import useStyles from "../styles/modalStyles";
 
 const CreateBoard = ({ history }) => {
-  // const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  const classes = useStyles();
   const [title, setTitle] = useState("");
+  const [open, setOpen] = useState(false);
+
   const dispatch = useDispatch();
 
   const onSubmit = async (e) => {
@@ -19,8 +20,8 @@ const CreateBoard = ({ history }) => {
 
   // the pop up
   const body = (
-    <div>
-      <div>
+    <div className={`${classes.paper} ${classes.createBoardModal}`}>
+      <div className={classes.modalTop}>
         <h1>Create new board</h1>
         <Button onClick={() => setOpen(false)}>
           <CloseIcon />

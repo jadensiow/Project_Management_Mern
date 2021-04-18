@@ -30,21 +30,6 @@ const CardSchema = new Schema({
     },
   ],
   date: { startDate: { type: Date }, endDate: { type: Date } },
-  checklist: [
-    {
-      text: {
-        type: String,
-      },
-      complete: {
-        type: Boolean,
-      },
-    },
-  ],
-  archived: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
 });
 
 module.exports = Card = model("card", CardSchema);

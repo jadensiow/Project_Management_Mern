@@ -10,22 +10,16 @@ import {
   GET_LIST,
   ADD_LIST,
   RENAME_LIST,
-  ARCHIVE_LIST,
   GET_CARD,
   ADD_CARD,
   EDIT_CARD,
   MOVE_CARD,
-  ARCHIVE_CARD,
   DELETE_CARD,
   GET_ACTIVITY,
   ADD_MEMBER,
-  MOVE_LIST,
   ADD_CARD_MEMBER,
-  ADD_CHECKLIST_ITEM,
-  EDIT_CHECKLIST_ITEM,
-  COMPLETE_CHECKLIST_ITEM,
-  DELETE_CHECKLIST_ITEM,
   RAND_IMG,
+  MOVE_LIST,
 } from "./types";
 
 const config = {
@@ -203,25 +197,6 @@ export const renameList = (listId, formData) => async (dispatch) => {
   }
 };
 
-// Archive/Unarchive list
-export const archiveList = (listId, archive) => async (dispatch) => {
-  try {
-    const res = await axios.patch(`/api/lists/archive/${archive}/${listId}`);
-
-    dispatch({
-      type: ARCHIVE_LIST,
-      payload: res.data,
-    });
-
-    dispatch(getActivity());
-  } catch (err) {
-    dispatch({
-      type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
-
 // Get card
 export const getCard = (id) => async (dispatch) => {
   try {
@@ -303,25 +278,6 @@ export const moveCard = (cardId, formData) => async (dispatch) => {
   }
 };
 
-// Archive/Unarchive card
-export const archiveCard = (cardId, archive) => async (dispatch) => {
-  try {
-    const res = await axios.patch(`/api/cards/archive/${archive}/${cardId}`);
-
-    dispatch({
-      type: ARCHIVE_CARD,
-      payload: res.data,
-    });
-
-    dispatch(getActivity());
-  } catch (err) {
-    dispatch({
-      type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
-
 // Delete card
 export const deleteCard = (listId, cardId) => async (dispatch) => {
   try {
@@ -379,25 +335,6 @@ export const addMember = (userId) => async (dispatch) => {
   }
 };
 
-// Move list
-export const moveList = (listId, formData) => async (dispatch) => {
-  try {
-    const body = JSON.stringify(formData);
-
-    const res = await axios.patch(`/api/lists/move/${listId}`, body, config);
-
-    dispatch({
-      type: MOVE_LIST,
-      payload: res.data,
-    });
-  } catch (err) {
-    dispatch({
-      type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
-
 // Add card member
 export const addCardMember = (formData) => async (dispatch) => {
   try {
@@ -420,79 +357,15 @@ export const addCardMember = (formData) => async (dispatch) => {
     });
   }
 };
-
-// Add checklist item
-export const addChecklistItem = (cardId, formData) => async (dispatch) => {
+// Move list
+export const moveList = (listId, formData) => async (dispatch) => {
   try {
     const body = JSON.stringify(formData);
 
-    const res = await axios.post(`/api/checklists/${cardId}`, body, config);
+    const res = await axios.patch(`/api/lists/move/${listId}`, body, config);
 
     dispatch({
-      type: ADD_CHECKLIST_ITEM,
-      payload: res.data,
-    });
-  } catch (err) {
-    dispatch({
-      type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
-
-// Edit checklist item
-export const editChecklistItem = (cardId, itemId, formData) => async (
-  dispatch
-) => {
-  try {
-    const body = JSON.stringify(formData);
-
-    const res = await axios.patch(
-      `/api/checklists/${cardId}/${itemId}`,
-      body,
-      config
-    );
-
-    dispatch({
-      type: EDIT_CHECKLIST_ITEM,
-      payload: res.data,
-    });
-  } catch (err) {
-    dispatch({
-      type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
-
-// Complete/Uncomplete checklist item
-export const completeChecklistItem = (formData) => async (dispatch) => {
-  try {
-    const { cardId, complete, itemId } = formData;
-
-    const res = await axios.patch(
-      `/api/checklists/${cardId}/${complete}/${itemId}`
-    );
-
-    dispatch({
-      type: COMPLETE_CHECKLIST_ITEM,
-      payload: res.data,
-    });
-  } catch (err) {
-    dispatch({
-      type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
-
-// Delete checklist item
-export const deleteChecklistItem = (cardId, itemId) => async (dispatch) => {
-  try {
-    const res = await axios.delete(`/api/checklists/${cardId}/${itemId}`);
-
-    dispatch({
-      type: DELETE_CHECKLIST_ITEM,
+      type: MOVE_LIST,
       payload: res.data,
     });
   } catch (err) {

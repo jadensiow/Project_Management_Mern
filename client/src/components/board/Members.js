@@ -45,7 +45,9 @@ const Members = () => {
         {boardMembers.map((member) => {
           return (
             <Tooltip title={member.name} key={member.user}>
-              <Avatar className="avatar">{getInitials(member.name)}</Avatar>
+              <Avatar src={member.avatar} className="avatar">
+                {getInitials(member.name)}
+              </Avatar>
             </Tooltip>
           );
         })}

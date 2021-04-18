@@ -110,34 +110,6 @@ router.patch(
   }
 );
 
-// Archive/Unarchive a list
-router.patch("/archive/:archive/:id", [auth, member], async (req, res) => {
-  try {
-    const list = await List.findById(req.params.id);
-    if (!list) {
-      return res.status(404).json({ msg: "List not found" });
-    }
-
-    list.archived = req.params.archive === "true";
-    await list.save();
-
-    // Log activity
-    const user = await User.findById(req.user.id);
-    const board = await Board.findById(req.header("boardId"));
-    board.activity.unshift({
-      text: list.archived
-        ? `${user.name} archived list '${list.title}'`
-        : `${user.name} sent list '${list.title}' to the board`,
-    });
-    await board.save();
-
-    res.json(list);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
 // Move a list
 router.patch("/move/:id", [auth, member], async (req, res) => {
   try {

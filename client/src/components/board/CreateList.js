@@ -9,11 +9,6 @@ const CreateList = () => {
   const [title, setTitle] = useState("");
   const dispatch = useDispatch();
 
-  const formRef = useRef(null);
-  useEffect(() => {
-    formRef && formRef.current && formRef.current.scrollIntoView();
-  }, [title]);
-
   const onSubmit = async (e) => {
     e.preventDefault();
     dispatch(addList({ title }));
@@ -27,7 +22,7 @@ const CreateList = () => {
       </Button>
     </div>
   ) : (
-    <div ref={formRef} className="create-list-form">
+    <div className="create-list-form">
       <form onSubmit={(e) => onSubmit(e)}>
         <TextField
           variant="outlined"

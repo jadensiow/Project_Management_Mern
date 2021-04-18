@@ -8,22 +8,16 @@ import {
   GET_LIST,
   ADD_LIST,
   RENAME_LIST,
-  ARCHIVE_LIST,
   GET_CARD,
   ADD_CARD,
   EDIT_CARD,
   MOVE_CARD,
-  ARCHIVE_CARD,
   DELETE_CARD,
   GET_ACTIVITY,
   ADD_MEMBER,
-  MOVE_LIST,
   ADD_CARD_MEMBER,
-  ADD_CHECKLIST_ITEM,
-  EDIT_CHECKLIST_ITEM,
-  COMPLETE_CHECKLIST_ITEM,
-  DELETE_CHECKLIST_ITEM,
   RAND_IMG,
+  MOVE_LIST,
 } from "../action/types";
 
 const initialState = {
@@ -82,7 +76,6 @@ export default function (state = initialState, action) {
           lists: [...state.board.lists, payload._id],
         },
       };
-    case ARCHIVE_LIST:
     case RENAME_LIST:
       return {
         ...state,
@@ -113,11 +106,7 @@ export default function (state = initialState, action) {
           ),
         },
       };
-    case ADD_CHECKLIST_ITEM:
-    case EDIT_CHECKLIST_ITEM:
-    case COMPLETE_CHECKLIST_ITEM:
-    case DELETE_CHECKLIST_ITEM:
-    case ARCHIVE_CARD:
+
     case ADD_CARD_MEMBER:
     case EDIT_CARD:
       return {
@@ -190,6 +179,7 @@ export default function (state = initialState, action) {
           lists: payload,
         },
       };
+
     default:
       return state;
   }

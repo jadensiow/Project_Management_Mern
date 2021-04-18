@@ -120,34 +120,6 @@ router.patch("/edit/:id", [auth, member], async (req, res) => {
   }
 });
 
-// Archive/Unarchive a card
-router.patch("/archive/:archive/:id", [auth, member], async (req, res) => {
-  try {
-    const card = await Card.findById(req.params.id);
-    if (!card) {
-      return res.status(404).json({ msg: "Card not found" });
-    }
-
-    card.archived = req.params.archive === "true";
-    await card.save();
-
-    // Log activity
-    const user = await User.findById(req.user.id);
-    const board = await Board.findById(req.header("boardId"));
-    board.activity.unshift({
-      text: card.archived
-        ? `${user.name} archived card '${card.title}'`
-        : `${user.name} sent card '${card.title}' to the board`,
-    });
-    await board.save();
-
-    res.json(card);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
 // Move a card
 router.patch("/move/:id", [auth, member], async (req, res) => {
   try {

@@ -45,15 +45,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
     marginBottom: 10,
   },
-  checklistItem: {
-    display: "flex",
-    width: "100%",
-    justifyContent: "space-between",
-    margin: "2px 0 5px",
-  },
-  checklistFormLabel: {
-    width: "100%",
-  },
+
   itemButtons: {
     display: "flex",
     margin: "auto",
@@ -64,9 +56,7 @@ const useStyles = makeStyles((theme) => ({
   itemButton: {
     height: 40,
   },
-  checklistBottom: {
-    marginTop: 5,
-  },
+
   paper: {
     display: "flex",
     flexDirection: "column",
@@ -100,9 +90,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "flex-end",
     marginTop: 20,
-  },
-  archiveButton: {
-    marginBottom: 5,
   },
 }));
 

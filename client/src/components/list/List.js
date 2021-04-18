@@ -26,7 +26,7 @@ const List = ({ listId, index }) => {
     addingCard && createCardFormRef.current.scrollIntoView();
   }, [addingCard]);
 
-  return !list || (list && list.archived) ? (
+  return !list ? (
     ""
   ) : (
     <Draggable draggableId={listId} index={index}>

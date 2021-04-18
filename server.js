@@ -30,7 +30,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useFindAndModify: false, // Set to false to make findOneAndUpdate() and findOneAndRemove() use native findOneAndUpdate() rather than findAndModify().
 });
 mongoose.connection.once("open", () => {
-  console.log("XXXXXXXXXXXXXX Connected to mongoose...");
+  console.log("Connected to mongoose...");
 });
 
 // Routes

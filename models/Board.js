@@ -46,6 +46,11 @@ const BoardSchema = new Schema(
           type: String,
           default: "admin",
         },
+        avatar: {
+          type: String,
+          default:
+            "https://www.gravatar.com/avatar/94d093eda664addd6e450d7e9881bcad?s=32&d=identicon&r=PG",
+        },
       },
     ],
   },

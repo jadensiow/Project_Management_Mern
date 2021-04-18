@@ -17,7 +17,7 @@ import {
   Avatar,
   Tooltip,
 } from "@material-ui/core";
-import { format } from "date-fns";
+import CardModal from "./CardModal";
 
 const Card = ({ cardId, list, index }) => {
   const [editing, setEditing] = useState(false);
@@ -42,19 +42,6 @@ const Card = ({ cardId, list, index }) => {
   }, [cardId, dispatch]);
 
   useEffect(() => {
-    if (card) {
-      setTitle(card.title);
-      card.checklist &&
-        setCompleteItems(
-          card.checklist.reduce(
-            (completed, item) => (completed += item.complete ? 1 : 0),
-            0
-          )
-        );
-    }
-  }, [card]);
-
-  useEffect(() => {
     cardRef && cardRef.current && setHeight(cardRef.current.clientHeight);
   }, [list, card, cardRef]);
 
@@ -65,10 +52,17 @@ const Card = ({ cardId, list, index }) => {
     setMouseOver(false);
   };
 
-  return !card || (card && card.archived) ? (
+  return !card ? (
     ""
   ) : (
     <Fragment>
+      <CardModal
+        cardId={cardId}
+        open={openModal}
+        setOpen={setOpenModal}
+        card={card}
+        list={list}
+      />
       {!editing ? (
         <Draggable draggableId={cardId} index={index}>
           {(provided) => (
@@ -117,21 +111,6 @@ const Card = ({ cardId, list, index }) => {
                         className="description-indicator"
                         fontSize="small"
                       />
-                    )}
-                    {card.checklist && card.checklist.length > 0 && (
-                      <div
-                        className={`checklist-indicator ${
-                          completeItems === card.checklist.length
-                            ? "completed-checklist-indicator"
-                            : ""
-                        }`}
-                      >
-                        <AssignmentTurnedInIcon
-                          fontSize="small"
-                          className="checklist-indicator-icon"
-                        />
-                        {completeItems}/{card.checklist.length}
-                      </div>
                     )}
                   </div>
                   <div className="card-member-avatars">

@@ -15,6 +15,7 @@ const User = require("../models/User");
 // Get authorized user
 router.get("/", auth, async (req, res) => {
   try {
+    // everything other than password
     const user = await User.findById(req.user.id).select("-password");
     res.json(user);
   } catch (err) {

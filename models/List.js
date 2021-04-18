@@ -17,11 +17,6 @@ const ListSchema = new Schema({
       ref: "cards",
     },
   ],
-  archived: {
-    type: Boolean,
-    required: true,
-    default: false,
-  },
 });
 
 module.exports = List = model("list", ListSchema);

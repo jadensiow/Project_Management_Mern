@@ -160,6 +160,7 @@ router.put("/addMember/:userId", [auth, member], async (req, res) => {
   try {
     const board = await Board.findById(req.header("boardId"));
     const user = await User.findById(req.params.userId);
+    console.log(user);
     if (!user) {
       return res.status(404).json({ msg: "User not found" });
     }
@@ -176,7 +177,12 @@ router.put("/addMember/:userId", [auth, member], async (req, res) => {
     await user.save();
 
     // Add user to board's members with 'normal' role
-    board.members.push({ user: user.id, name: user.name, role: "normal" });
+    board.members.push({
+      user: user.id,
+      name: user.name,
+      role: "normal",
+      avatar: user.avatar,
+    });
 
     // Log activity
     board.activity.unshift({

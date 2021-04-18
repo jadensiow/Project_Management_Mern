@@ -248,10 +248,6 @@ body {
   flex-direction: column;
 }
 
-.board .archived-card {
-  display: flex;
-  flex-direction: column;
-}
 
 .board .lists {
   display: flex;
