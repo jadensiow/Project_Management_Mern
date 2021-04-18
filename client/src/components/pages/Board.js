@@ -60,7 +60,7 @@ const Board = ({ match }) => {
           "url(" +
           (board.backgroundURL
             ? board.backgroundURL
-            : "https://images.unsplash.com/photo-1598197748967-b4674cb3c266?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2689&q=80") +
+            : "https://source.unsplash.com/featured/?views&auto=format&fit=crop&w=2689&q=80") +
           ")",
       }}
     >
