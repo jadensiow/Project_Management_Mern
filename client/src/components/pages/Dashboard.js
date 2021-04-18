@@ -22,7 +22,6 @@ const Dashboard = () => {
   }, [dispatch]);
 
   // update boards from aciton/board to the data from monngodb. as may have multiple board
-
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }

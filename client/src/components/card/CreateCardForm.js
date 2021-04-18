@@ -4,9 +4,10 @@ import PropTypes from "prop-types";
 import { addCard } from "../redux/action/board";
 import { Card, CardContent, TextField, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import { DateRangePicker } from "rsuite";
+import CalendarPopUp from "../functions/CalendarPopUp";
 
 const CreateCardForm = ({ listId, setAdding }) => {
+  const [showCalendar, setShowCalendar] = useState(false);
   const [title, setTitle] = useState("");
   const dispatch = useDispatch();
 
@@ -19,9 +20,6 @@ const CreateCardForm = ({ listId, setAdding }) => {
     e.preventDefault();
     dispatch(addCard({ title, listId }));
     setTitle("");
-  };
-  const setDateArray = (dates) => {
-    console.log(dates);
   };
 
   return (
@@ -36,7 +34,6 @@ const CreateCardForm = ({ listId, setAdding }) => {
             margin="normal"
             fullWidth
             multiline
-            required
             label="Enter a title for this card"
             autoFocus
             value={title}
@@ -44,11 +41,18 @@ const CreateCardForm = ({ listId, setAdding }) => {
             onKeyPress={(e) => e.key === "Enter" && onSubmit(e)}
           />
         </CardContent>
-        <DateRangePicker
-          placeholder="Select Date Range"
-          onChange={(dates) => setDateArray(dates)}
-        />
       </Card>
+      <div className="card-actions">
+        <Button type="submit" variant="contained" color="primary">
+          Date Range
+        </Button>
+        <Button
+          onClick={() => {
+            setShowCalendar(!showCalendar);
+          }}
+        ></Button>
+        {showCalendar && <CalendarPopUp setShowCalendar={setShowCalendar} />}
+      </div>
       <div className="card-actions">
         <Button type="submit" variant="contained" color="primary">
           Add Card

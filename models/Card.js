@@ -29,6 +29,7 @@ const CardSchema = new Schema({
       },
     },
   ],
+  date: [{ startdate: { type: Date } }, { enddate: { type: Date } }],
   checklist: [
     {
       text: {
