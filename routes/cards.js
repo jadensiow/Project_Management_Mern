@@ -25,10 +25,14 @@ router.post(
 
     try {
       const { title, listId } = req.body;
+      const { startDate, endDate } = req.body;
+      console.log("testing", req.body);
+
       const boardId = req.header("boardId");
 
       // Create and save the card
-      const newCard = new Card({ title });
+      const newCard = new Card({ title, date: { startDate, endDate } });
+      console.log("new Cardddd", newCard);
       const card = await newCard.save();
 
       // Assign the card to the list

@@ -16,7 +16,8 @@ const Board = ({ match }) => {
   const board = useSelector((state) => state.board.board);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
-
+  const boarding = useSelector((state) => state.board);
+  console.log(boarding);
   // will get warning if without dispatch
   useEffect(() => {
     dispatch(getBoard(match.params.id));

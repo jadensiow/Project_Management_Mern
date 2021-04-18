@@ -1,38 +1,69 @@
 import React from "react";
+import { useState } from "react";
+
+import CloseIcon from "@material-ui/icons/Close";
+import { DateRangePicker } from "react-date-range";
 import { Button } from "@material-ui/core";
 
-import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 const CalendarPopUp = (props) => {
-  // https://www.npmjs.com/package/react-date-range
-  const handleSelect = (ranges) => {
-    console.log(ranges);
-  };
-
-  const selectionRange = {
+  const [selectionRange, setSelectionRange] = useState({
     startDate: new Date(),
     endDate: new Date(),
     key: "selection",
+  });
+
+  const styles = {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    zIndex: 100,
+    padding: "3rem 4rem",
+    backgroundColor: "white",
+    borderRadius: "1rem",
+    boxShadow: "0 0 20px black",
+  };
+
+  // https://www.npmjs.com/package/react-date-range
+  const handleSelect = (ranges) => {
+    setSelectionRange(ranges.selection);
+  };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    props.startDateCard(selectionRange.startDate);
+    props.endDateCard(selectionRange.endDate);
+    props.setShowCalendar(false);
   };
   //
+  console.log(selectionRange);
+
   return (
-    <div>
-      {" "}
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
+    <div style={styles}>
+      <div
         style={{
-          position: "absolute",
-          left: "50%",
-          top: "-15%",
+          display: "flex",
+          flexDirection: "coloum",
+          justifyContent: "center",
+          alignItems: "center",
         }}
-        onClick={() => props.setShowCalendar(false)}
       >
-        Close
-      </Button>
-      <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} />
+        <CloseIcon
+          color="primary"
+          style={{
+            position: "absolute",
+            top: "3%",
+            right: "3%",
+          }}
+          onClick={() => props.setShowCalendar(false)}
+          onMouseOver={(e) => (e.target.style.cursor = "pointer")}
+        />
+        <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} />{" "}
+        <Button variant="contained" color="primary" onClick={submitHandler}>
+          Submit
+        </Button>
+      </div>
     </div>
   );
 };

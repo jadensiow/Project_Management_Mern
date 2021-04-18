@@ -102,6 +102,8 @@ const Card = ({ cardId, list, index }) => {
                   />
                 )}
                 <p>{card.title}</p>
+                <p>Start: {card.date.startDate}</p>
+                <p>End:: {card.date.endDate}</p>
                 <div className="card-bottom">
                   <div className="card-bottom-left">
                     {card.description && (

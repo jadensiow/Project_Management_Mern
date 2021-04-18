@@ -10,6 +10,8 @@ const CreateCardForm = ({ listId, setAdding }) => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [title, setTitle] = useState("");
   const dispatch = useDispatch();
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   const formRef = useRef(null);
   useEffect(() => {
@@ -18,10 +20,11 @@ const CreateCardForm = ({ listId, setAdding }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    dispatch(addCard({ title, listId }));
+    dispatch(addCard({ title, listId, startDate, endDate }));
     setTitle("");
   };
-
+  console.log(startDate);
+  console.log(endDate);
   return (
     <form
       ref={formRef}
@@ -35,6 +38,7 @@ const CreateCardForm = ({ listId, setAdding }) => {
             fullWidth
             multiline
             label="Enter a title for this card"
+            required
             autoFocus
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -42,16 +46,24 @@ const CreateCardForm = ({ listId, setAdding }) => {
           />
         </CardContent>
       </Card>
+
       <div className="card-actions">
-        <Button type="submit" variant="contained" color="primary">
-          Date Range
-        </Button>
         <Button
+          variant="contained"
+          color="primary"
           onClick={() => {
             setShowCalendar(!showCalendar);
           }}
-        ></Button>
-        {showCalendar && <CalendarPopUp setShowCalendar={setShowCalendar} />}
+        >
+          Date
+        </Button>
+        {showCalendar && (
+          <CalendarPopUp
+            setShowCalendar={setShowCalendar}
+            startDateCard={(date) => setStartDate(date)}
+            endDateCard={(date) => setEndDate(date)}
+          />
+        )}
       </div>
       <div className="card-actions">
         <Button type="submit" variant="contained" color="primary">
