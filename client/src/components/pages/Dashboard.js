@@ -5,7 +5,6 @@ import Navbar from "../functions/Navbar";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { getBoards } from "../redux/action/board";
 import CreateBoard from "../board/CreateBoard";
-import { DateRangePicker } from "rsuite";
 
 const Dashboard = () => {
   useEffect(() => {
@@ -23,9 +22,7 @@ const Dashboard = () => {
   }, [dispatch]);
 
   // update boards from aciton/board to the data from monngodb. as may have multiple board
-  const setDateArray = (dates) => {
-    console.log(dates);
-  };
+
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }
@@ -34,10 +31,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard-and-navbar">
       <Navbar />
-      <DateRangePicker
-        placeholder="Select Date Range"
-        onChange={(dates) => setDateArray(dates)}
-      />
+
       <section className="dashboard">
         <h1>Welcome {user && user.name}</h1>
         <h2>Your Boards</h2>

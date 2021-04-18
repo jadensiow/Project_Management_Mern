@@ -20,6 +20,9 @@ const CreateCardForm = ({ listId, setAdding }) => {
     dispatch(addCard({ title, listId }));
     setTitle("");
   };
+  const setDateArray = (dates) => {
+    console.log(dates);
+  };
 
   return (
     <form
@@ -40,8 +43,11 @@ const CreateCardForm = ({ listId, setAdding }) => {
             onChange={(e) => setTitle(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && onSubmit(e)}
           />
-          <></>
         </CardContent>
+        <DateRangePicker
+          placeholder="Select Date Range"
+          onChange={(dates) => setDateArray(dates)}
+        />
       </Card>
       <div className="card-actions">
         <Button type="submit" variant="contained" color="primary">
