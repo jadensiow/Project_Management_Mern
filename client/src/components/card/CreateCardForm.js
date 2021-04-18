@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { addCard } from "../redux/action/board";
 import { Card, CardContent, TextField, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
+import { DateRangePicker } from "rsuite";
 
 const CreateCardForm = ({ listId, setAdding }) => {
   const [title, setTitle] = useState("");
@@ -39,6 +40,7 @@ const CreateCardForm = ({ listId, setAdding }) => {
             onChange={(e) => setTitle(e.target.value)}
             onKeyPress={(e) => e.key === "Enter" && onSubmit(e)}
           />
+          <></>
         </CardContent>
       </Card>
       <div className="card-actions">

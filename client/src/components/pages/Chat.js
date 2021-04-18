@@ -1,12 +1,19 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Container, Col, Row } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 
 import io from "socket.io-client";
 
 const socket = io();
 
 const Chat = () => {
+  useEffect(() => {
+    document.title = "Chatrooms";
+  }, []);
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const boards = useSelector((state) => state.board.boards);
+
   const [chatUsers, setChatUsers] = useState([]);
   const [chatMessage, setchatMessage] = useState({
     name: "",
@@ -16,9 +23,7 @@ const Chat = () => {
   });
   const [msgList, setMsgList] = useState([]);
   const [currentRoom, setCurrentRoom] = useState("General");
-  const boards = useSelector((state) => state.board.boards);
-  const user = useSelector((state) => state.auth.user);
-  console.log(user);
+
   useEffect(() => {
     socket.emit("userJoin", user.name);
   }, []);
@@ -79,6 +84,10 @@ const Chat = () => {
     });
     return isPM;
   };
+
+  if (!isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Container>
