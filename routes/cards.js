@@ -37,7 +37,7 @@ router.post(
 
       // Assign the card to the list
       const list = await List.findById(listId);
-      list.cards.push(card.id);
+      list.cards.push(card);
       await list.save();
 
       // Log activity

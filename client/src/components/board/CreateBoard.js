@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { addBoard } from "../redux/action/board";
@@ -8,9 +8,8 @@ import useStyles from "../styles/modalStyles";
 
 const CreateBoard = ({ history }) => {
   const classes = useStyles();
-  const [title, setTitle] = useState("");
   const [open, setOpen] = useState(false);
-
+  const [title, setTitle] = useState("");
   const dispatch = useDispatch();
 
   const onSubmit = async (e) => {

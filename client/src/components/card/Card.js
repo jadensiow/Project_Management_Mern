@@ -9,7 +9,6 @@ import CardMUI from "@material-ui/core/Card";
 import EditIcon from "@material-ui/icons/Edit";
 import CloseIcon from "@material-ui/icons/Close";
 import SubjectIcon from "@material-ui/icons/Subject";
-import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import {
   TextField,
   CardContent,
@@ -25,7 +24,6 @@ const Card = ({ cardId, list, index }) => {
   const [mouseOver, setMouseOver] = useState(false);
   const [title, setTitle] = useState("");
   const [height, setHeight] = useState(0);
-  const [completeItems, setCompleteItems] = useState(0);
   const cardRef = useRef(null);
   const card = useSelector((state) =>
     state.board.board.cardObjects.find((object) => object._id === cardId)
