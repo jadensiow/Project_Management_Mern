@@ -5,6 +5,7 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 5000;
+const path = require('path'); 
 
 var cors = require("cors");
 
@@ -86,5 +87,7 @@ io.on("connection", (socket) => {
     console.log("Users left: " + users[socket.id]);
   });
 });
+
+if (process.env.NODE_ENV === 'production') { app.use(express.static('./client/build')); }
 
 server.listen(PORT, () => console.log("Server running on port:" + PORT));

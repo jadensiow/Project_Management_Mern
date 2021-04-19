@@ -9,6 +9,7 @@ import Dashboard from "./components/pages/Dashboard";
 import Alert from "./components/functions/alert";
 import Board from "./components/pages/Board";
 import Chat from "./components/pages/Chat";
+import GanttChart from "./components/pages/GanttChart"
 
 // Token
 import AuthToken from "./components/functions/AuthToken";
@@ -42,6 +43,8 @@ const App = () => {
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/board/:id" component={Board} />
             <Route exact path="/board/:id/chat" component={Chat} />
+            <Route exact path="/board/:id/gantt_chart" component={GanttChart} />
+
           </Switch>
         </>
       </Router>

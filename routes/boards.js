@@ -160,7 +160,6 @@ router.put("/addMember/:userId", [auth, member], async (req, res) => {
   try {
     const board = await Board.findById(req.header("boardId"));
     const user = await User.findById(req.params.userId);
-    console.log(user);
     if (!user) {
       return res.status(404).json({ msg: "User not found" });
     }

@@ -70,6 +70,9 @@ const Board = ({ match }) => {
         <nav>
           <Link to={`/board/${board._id}/chat`}>Chat</Link>
         </nav>
+        <nav>
+          <Link to={`/board/${board._id}/gantt_chart`}>ganttchart</Link>
+        </nav>
         <div className="board-top">
           <div className="board-top-left">
             <BoardTitle board={board} />
