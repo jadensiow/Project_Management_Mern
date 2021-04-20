@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { addBoard } from "../redux/action/board";
-import { Modal, TextField, Button } from "@material-ui/core";
+import { Modal as div, TextField, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "../styles/modalStyles";
-import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";
-
+import { AnimatePresence, motion } from "framer-motion";
+import { modalAnimation } from "../../animations/modalAnimations";
 
 const CreateBoard = ({ history }) => {
   const classes = useStyles();
@@ -47,24 +47,37 @@ const CreateBoard = ({ history }) => {
   );
 
   return (
-    <AnimateSharedLayout type="crossfade">
-    <motion.div>
-      <motion.button
+    <div>
+      <button
         className="board-card create-board-card"
         onClick={() => setOpen(true)}
+        style={{ fontSize: "15px" }}
       >
         Create new board
-      </motion.button>
-      </motion.div>
+      </button>
       <AnimatePresence>
-      <motion.div>
-      <Modal open={open} onClose={() => setOpen(false)}>
-        {body}
-      </Modal>
-      </motion.div>
+        {open && (
+          <motion.div
+            variants={modalAnimation}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+          >
+            <div
+              style={{
+                position: "fixed",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              {body}
+            </div>
+          </motion.div>
+        )}
       </AnimatePresence>
-    </AnimateSharedLayout>
-  );;
+    </div>
+  );
 };
 
 export default withRouter(CreateBoard);

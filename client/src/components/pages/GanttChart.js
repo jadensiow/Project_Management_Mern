@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Container } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
@@ -14,19 +13,13 @@ import SelectShowChart from "../functions/SelectShowChart";
 ReactFC.fcRoot(FusionCharts, Gantt, FusionTheme);
 
 const GanttChart = ({ match }) => {
-	const [selectedIndex, setSelectedIndex] = useState(1);
-	const [open, setOpen] = useState(false);
 	const history = useHistory();
 
 	const board = useSelector((state) => state.board.board);
 	const list = useSelector((state) => state.board.board.listObjects);
 	const card = useSelector((state) => state.board.board.cardObjects);
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-	const dispatch = useDispatch();
 
-	const currentOpen = (bool) => {
-		setOpen(bool);
-	};
 	let dateFormatter = (date) => {
 		let d = date.getDate();
 		let m = date.getMonth() + 1;
@@ -36,8 +29,7 @@ const GanttChart = ({ match }) => {
 	console.log("list", list);
 	console.log("card", card);
 	let showCard = [];
-	const handleMenuItemClick = (event, index) => {
-		setSelectedIndex(index);
+	const handleMenuItemClick = (event) => {
 		showCard = [];
 		for (const elem of list) {
 			if (list === [] || card === []) return;
@@ -80,7 +72,7 @@ const GanttChart = ({ match }) => {
 				let dates = [];
 
 				for (let i = startYear; i <= endYear; i++) {
-					let endMonth = i != endYear ? 11 : parseInt(end[1]) - 1;
+					let endMonth = i !== endYear ? 11 : parseInt(end[1]) - 1;
 					let startMon = i === startYear ? parseInt(start[1]) - 1 : 0;
 					for (
 						let j = startMon;
@@ -160,13 +152,13 @@ const GanttChart = ({ match }) => {
 			let endDateArr = [];
 
 			while (start <= end) {
-				if (start.getDay() == 1 || (startDateArr.length == 0 && !sDate)) {
+				if (start.getDay() === 1 || (startDateArr.length === 0 && !sDate)) {
 					sDate = new Date(start.getTime());
 				}
 
 				if (
-					(sDate && start.getDay() == 0) ||
-					start.getTime() == end.getTime()
+					(sDate && start.getDay() === 0) ||
+					start.getTime() === end.getTime()
 				) {
 					eDate = new Date(start.getTime());
 				}
@@ -195,7 +187,6 @@ const GanttChart = ({ match }) => {
 			}
 
 			history.push(`/board/${match.params.id}/gantt_chart/${event.target.id}`);
-			setOpen(false);
 		}
 	};
 
@@ -224,12 +215,8 @@ const GanttChart = ({ match }) => {
 					}}
 				>
 					<SelectShowChart
-						idArr={match.params.id}
 						list={list}
-						selectedIndex={selectedIndex}
 						handleMenuItemClick={handleMenuItemClick}
-						open={open}
-						setOpen={currentOpen}
 					/>
 				</div>
 			</div>

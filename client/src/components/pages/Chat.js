@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Container, Col, Row } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import Navbar from "../functions/Navbar";
-import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
+import { motion } from "framer-motion";
+import { CircularProgress, Box } from "@material-ui/core";
+
+import { chatRouteTransition } from "../../animations/routeAnimations";
 
 import io from "socket.io-client";
 import "../styles/chat.css";
@@ -14,9 +18,10 @@ const Chat = () => {
   useEffect(() => {
     document.title = "Chatrooms";
   }, []);
+
   const { user, isAuthenticated } = useSelector((state) => state.auth);
   const boards = useSelector((state) => state.board.boards);
-  const board = useSelector((state) => state.board.board);
+  const pageID = useSelector((state) => state.board.board);
 
   const [chatUsers, setChatUsers] = useState([]);
   const [chatMessage, setchatMessage] = useState({
@@ -27,6 +32,7 @@ const Chat = () => {
   });
   const [msgList, setMsgList] = useState([]);
   const [currentRoom, setCurrentRoom] = useState("General");
+  let history = useHistory();
 
   useEffect(() => {
     socket.emit("userJoin", user.name);
@@ -88,101 +94,123 @@ const Chat = () => {
     });
     return isPM;
   };
-
+  const handleBack = () => {
+    history.push(`/board/${pageID._id}`);
+  };
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }
 
-  return (
-    <Container className="chat clearfix">
+  return !boards ? (
+    <>
       <Navbar />
-      <nav className="backpage">
-        <Link to={`/board/${board._id}/`}>Board</Link>
-      </nav>
-      <div id="user-list">
-        <h4>
-          <b>Project Chatrooms</b>
-        </h4>
-        <ul style={{ listStyleType: "none" }} className="clearfix">
-          {boards.map((board) => {
-            return (
-              <li
-                onClick={enterRoom}
-                style={{ cursor: "pointer" }}
-                key={board._id}
-              >
-                <h4>{board.title}</h4>
-                <hr className="line" size="8" width="100%"></hr>
-              </li>
-            );
-          })}
-        </ul>
-
-        <h4 className="name">
-          <b>Online Users: </b>
-        </h4>
-        <ul style={{ listStyleType: "none" }} className="clearfix">
-          {chatUsers.map((user) => {
-            return (
-              <li onClick={enterRoom} style={{ cursor: "pointer" }} key={user}>
-                <span className=" onlineStatus">
-                  {" "}
-                  <h4>{user}</h4>
-                  <StyledBadge
-                    className="light"
-                    overlap="circle"
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "right",
-                    }}
-                    variant="dot"
-                    marginLeft="20rem"
-                  ></StyledBadge>
-                </span>
-                <hr className="line" size="8" width="100%"></hr>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div className="messages">
-        <h4 className="room"> Chat Messages ({currentRoom}) Room </h4>
-        <form onSubmit={onSubmit}>
-          <input
-            type="text"
-            name="msg"
-            value={chatMessage.msg}
-            onChange={handleChange}
-            required
-            style={{ width: "80%" }}
-          />
-          <input className="msgSendBtn" type="submit" value="Send" />
-        </form>
-        <div id="chatMessages" style={{ border: "1px solid black" }}>
-          Messages
-          <ul style={{ listStyle: "none" }}>
-            {msgList.map((msgList, index) => {
+      <Box className="board-loading">
+        <CircularProgress />
+      </Box>
+    </>
+  ) : (
+    <motion.div
+      variants={chatRouteTransition}
+      initial="hidden"
+      animate="show"
+      exit="exit"
+      className="outer-div"
+    >
+      {" "}
+      <Navbar />
+      <Container className="chat clearfix">
+        <Button id="backpage" variant="contained" onClick={handleBack}>
+          Back To Board
+        </Button>
+        <div id="user-list">
+          <h4>
+            <b>Project Chatrooms</b>
+          </h4>
+          <ul style={{ listStyleType: "none" }} className="clearfix">
+            {boards.map((board) => {
               return (
-                <li key={index}>
-                  <b>
-                    {msgList.isPM
-                      ? `PM from ${msgList.name}: `
-                      : `${msgList.name}: `}
-                  </b>
-
-                  <i>
-                    <span style={{ color: msgList.isPM ? "red" : "black" }}>
-                      {""}
-                      {msgList.msg}
-                    </span>
-                  </i>
+                <li
+                  onClick={enterRoom}
+                  style={{ cursor: "pointer" }}
+                  key={board._id}
+                >
+                  <h4>{board.title}</h4>
+                  <hr className="line" size="8" width="100%"></hr>
                 </li>
               );
             })}
           </ul>
-        </div>{" "}
-      </div>
-    </Container>
+
+          <h4 className="name">
+            <b>Online Users: </b>
+          </h4>
+          <ul style={{ listStyleType: "none" }} className="clearfix">
+            {chatUsers.map((user) => {
+              return (
+                <li
+                  onClick={enterRoom}
+                  style={{ cursor: "pointer" }}
+                  key={user}
+                >
+                  <span className=" onlineStatus">
+                    {" "}
+                    <h4>{user}</h4>
+                    <StyledBadge
+                      className="light"
+                      overlap="circle"
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "right",
+                      }}
+                      variant="dot"
+                      marginLeft="20rem"
+                    ></StyledBadge>
+                  </span>
+                  <hr className="line" size="8" width="100%"></hr>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="messages">
+          <h4 className="room"> Chat Messages ({currentRoom}) Room </h4>
+          <form onSubmit={onSubmit}>
+            <input
+              type="text"
+              name="msg"
+              value={chatMessage.msg}
+              onChange={handleChange}
+              required
+              style={{ width: "80%" }}
+            />
+            <input className="msgSendBtn" type="submit" value="Send" />
+          </form>
+          <div id="chatMessages" style={{ border: "1px solid black" }}>
+            Messages
+            <ul style={{ listStyle: "none" }}>
+              {msgList.map((msgList, index) => {
+                return (
+                  <li key={index}>
+                    <b>
+                      {msgList.isPM
+                        ? `PM from ${msgList.name}: `
+                        : `${msgList.name}: `}
+                    </b>
+
+                    <i>
+                      <span style={{ color: msgList.isPM ? "red" : "black" }}>
+                        {""}
+                        {msgList.msg}
+                      </span>
+                    </i>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>{" "}
+        </div>
+      </Container>{" "}
+    </motion.div>
   );
 };
 

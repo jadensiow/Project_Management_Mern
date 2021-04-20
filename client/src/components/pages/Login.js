@@ -13,7 +13,7 @@ import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { routeTransition } from "../../animations/routeAnimations";
+import { loginRouteTransition } from "../../animations/routeAnimations";
 
 import "../styles/temp.css";
 
@@ -48,7 +48,7 @@ const Login = () => {
 
   return (
     <motion.div
-      variants={routeTransition}
+      variants={loginRouteTransition}
       initial="hidden"
       animate="show"
       exit="exit"

@@ -20,7 +20,7 @@
   width: 260px;
   float: left;
 }
-.backpage {
+#backpage {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
