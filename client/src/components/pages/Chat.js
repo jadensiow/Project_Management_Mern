@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Container, Col, Row } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+import Navbar from "../functions/Navbar";
+import { Link } from "react-router-dom";
 
 import io from "socket.io-client";
 import "../styles/chat.css";
@@ -14,6 +16,7 @@ const Chat = () => {
   }, []);
   const { user, isAuthenticated } = useSelector((state) => state.auth);
   const boards = useSelector((state) => state.board.boards);
+  const board = useSelector((state) => state.board.board);
 
   const [chatUsers, setChatUsers] = useState([]);
   const [chatMessage, setchatMessage] = useState({
@@ -91,35 +94,42 @@ const Chat = () => {
   }
 
   return (
-    <Container>
-      <Row>
-        <Col xs={5} style={{ border: "1px solid black" }}>
-          <h4><b>Project Chatrooms</b></h4>
-          <ul style={{ listStyleType: "none" }}>
-            {boards.map((board) => {
-              return (
-                <li
-                  onClick={enterRoom}
-                  style={{ cursor: "pointer" }}
-                  key={board._id}
-                >
-                 <h4>{board.title}</h4>
-                </li>
-              );
-            })}
-          </ul>
+    <Container className="chat clearfix">
+      <Navbar />
+      <nav className="backpage">
+        <Link to={`/board/${board._id}/`}>Board</Link>
+      </nav>
+      <div id="user-list">
+        <h4>
+          <b>Project Chatrooms</b>
+        </h4>
+        <ul style={{ listStyleType: "none" }} className="clearfix">
+          {boards.map((board) => {
+            return (
+              <li
+                onClick={enterRoom}
+                style={{ cursor: "pointer" }}
+                key={board._id}
+              >
+                <h4>{board.title}</h4>
+                <hr className="line" size="8" width="100%"></hr>
+              </li>
+            );
+          })}
+        </ul>
 
-          <h4 className="name"><b>Connected Users: </b></h4>
-          <ul style={{ listStyleType: "none" }}>
-            {chatUsers.map((user) => {
-              return (
-                <li
-                  onClick={enterRoom}
-                  style={{ cursor: "pointer" }}
-                  key={user}
-                >
-                <span className=" onlineStatus"> <h4>{user}</h4>
-                  <StyledBadge className="light"
+        <h4 className="name">
+          <b>Online Users: </b>
+        </h4>
+        <ul style={{ listStyleType: "none" }} className="clearfix">
+          {chatUsers.map((user) => {
+            return (
+              <li onClick={enterRoom} style={{ cursor: "pointer" }} key={user}>
+                <span className=" onlineStatus">
+                  {" "}
+                  <h4>{user}</h4>
+                  <StyledBadge
+                    className="light"
                     overlap="circle"
                     anchorOrigin={{
                       vertical: "bottom",
@@ -127,50 +137,51 @@ const Chat = () => {
                     }}
                     variant="dot"
                     marginLeft="20rem"
-                  ></StyledBadge></span>
+                  ></StyledBadge>
+                </span>
+                <hr className="line" size="8" width="100%"></hr>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <div className="messages">
+        <h4 className="room"> Chat Messages ({currentRoom}) Room </h4>
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            name="msg"
+            value={chatMessage.msg}
+            onChange={handleChange}
+            required
+            style={{ width: "80%" }}
+          />
+          <input className="msgSendBtn" type="submit" value="Send" />
+        </form>
+        <div id="chatMessages" style={{ border: "1px solid black" }}>
+          Messages
+          <ul style={{ listStyle: "none" }}>
+            {msgList.map((msgList, index) => {
+              return (
+                <li key={index}>
+                  <b>
+                    {msgList.isPM
+                      ? `PM from ${msgList.name}: `
+                      : `${msgList.name}: `}
+                  </b>
+
+                  <i>
+                    <span style={{ color: msgList.isPM ? "red" : "black" }}>
+                      {""}
+                      {msgList.msg}
+                    </span>
+                  </i>
                 </li>
               );
             })}
           </ul>
-        </Col>
-        <Col style={{ border: "1px solid black" }}>
-          <p> Chat Messages ({currentRoom}) Room </p>
-          <form onSubmit={onSubmit}>
-            <input
-              type="text"
-              name="msg"
-              value={chatMessage.msg}
-              onChange={handleChange}
-              required
-              style={{ width: "80%" }}
-            />
-            <input type="submit" value="Message" />
-          </form>
-          <div id="chatMessages" style={{ border: "1px solid black" }}>
-            Messages
-            <ul style={{ listStyle: "none" }}>
-              {msgList.map((msgList, index) => {
-                return (
-                  <li key={index}>
-                    <b>
-                      {msgList.isPM
-                        ? `PM from ${msgList.name}: `
-                        : `${msgList.name}: `}
-                    </b>
-
-                    <i>
-                      <span style={{ color: msgList.isPM ? "red" : "black" }}>
-                        {""}
-                        {msgList.msg}
-                      </span>
-                    </i>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </Col>
-      </Row>
+        </div>{" "}
+      </div>
     </Container>
   );
 };

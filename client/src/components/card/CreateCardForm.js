@@ -23,8 +23,7 @@ const CreateCardForm = ({ listId, setAdding }) => {
     dispatch(addCard({ title, listId, startDate, endDate }));
     setTitle("");
   };
-  console.log(startDate);
-  console.log(endDate);
+
   return (
     <form
       ref={formRef}
