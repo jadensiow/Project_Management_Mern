@@ -4,7 +4,8 @@ import { Container, Col, Row } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 
 import io from "socket.io-client";
-
+import "../styles/chat.css";
+import StyledBadge from "../styles/onlinelight";
 const socket = io();
 
 const Chat = () => {
@@ -93,7 +94,7 @@ const Chat = () => {
     <Container>
       <Row>
         <Col xs={5} style={{ border: "1px solid black" }}>
-          <p>Project Chatrooms</p>
+          <h4><b>Project Chatrooms</b></h4>
           <ul style={{ listStyleType: "none" }}>
             {boards.map((board) => {
               return (
@@ -102,13 +103,13 @@ const Chat = () => {
                   style={{ cursor: "pointer" }}
                   key={board._id}
                 >
-                  {board.title}
+                 <h4>{board.title}</h4>
                 </li>
               );
             })}
           </ul>
 
-          <p>Connected sockets: </p>
+          <h4 className="name"><b>Connected Users: </b></h4>
           <ul style={{ listStyleType: "none" }}>
             {chatUsers.map((user) => {
               return (
@@ -117,7 +118,16 @@ const Chat = () => {
                   style={{ cursor: "pointer" }}
                   key={user}
                 >
-                  {user}
+                <span className=" onlineStatus"> <h4>{user}</h4>
+                  <StyledBadge className="light"
+                    overlap="circle"
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "right",
+                    }}
+                    variant="dot"
+                    marginLeft="20rem"
+                  ></StyledBadge></span>
                 </li>
               );
             })}
