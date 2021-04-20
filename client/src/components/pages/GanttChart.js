@@ -14,16 +14,12 @@ const moment = require("moment");
 ReactFC.fcRoot(FusionCharts, Gantt, FusionTheme);
 
 const GanttChart = ({ match }) => {
-  const [selectChart, setSelectChart] = useState("");
   const board = useSelector((state) => state.board.board);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const dispatch = useDispatch();
 
-  console.log(board);
-  console.log(board.cardObjects);
-  // if (!isAuthenticated) {
-  // 	return <Redirect to="/" />;
-  // }
+  if (!isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   const testData = {
     chart: {
@@ -55,7 +51,8 @@ const GanttChart = ({ match }) => {
     ],
   };
 
-  let oldDate = new Date(
+  // get latest date
+  let endDate = new Date(
     Math.max.apply(
       null,
       board.cardObjects.map(function (e) {
@@ -63,6 +60,8 @@ const GanttChart = ({ match }) => {
       })
     )
   );
+
+  // get earliest  date
   let newDate = new Date(
     Math.min.apply(
       null,
@@ -71,17 +70,17 @@ const GanttChart = ({ match }) => {
       })
     )
   );
-
+  // format time format to YYYY/MM/DD
   let dateToYMD = (date) => {
     let d = date.getDate();
     let m = date.getMonth() + 1;
     let y = date.getFullYear();
     return "" + y + "/" + (m <= 9 ? "0" + m : m) + "/" + (d <= 9 ? "0" + d : d);
   };
-  let oldDateFormat = dateToYMD(oldDate);
-  let earlyDateFormat = dateToYMD(newDate);
-  console.log(oldDate);
-  console.log(oldDateFormat);
+  let endDateformat = dateToYMD(endDate);
+  let startDateFormat = dateToYMD(newDate);
+
+  // get start of every month
   let startDateRange = (startDate, endDate) => {
     let start = startDate.split("/");
     let end = endDate.split("/");
@@ -100,8 +99,9 @@ const GanttChart = ({ match }) => {
     }
     return dates;
   };
-  let newDateFormat2 = startDateRange(earlyDateFormat, oldDateFormat);
+  let startMonthDate = startDateRange(startDateFormat, endDateformat);
 
+  // get last date of every month
   let lastDate = (date) => {
     let arr = [];
 
@@ -113,12 +113,13 @@ const GanttChart = ({ match }) => {
     }
     return arr;
   };
-  let oldDateFormat2 = lastDate(newDateFormat2);
+  let endMonthDate = lastDate(startMonthDate);
 
+  // show each month in name e.g "Aug"
   let eachMonth = (startDate, endDate) => {
-    var fromDate = moment(startDate, "YYYY/MM/DD");
-    var toDate = moment(endDate, "YYYY/MM/DD");
-    var monthData = [];
+    let fromDate = moment(startDate, "YYYY/MM/DD");
+    let toDate = moment(endDate, "YYYY/MM/DD");
+    let monthData = [];
 
     while (toDate > fromDate || fromDate.format("M") === toDate.format("M")) {
       monthData.push(fromDate.format("MMMM"));
@@ -127,32 +128,33 @@ const GanttChart = ({ match }) => {
     return monthData;
   };
 
-  let monthName = eachMonth(earlyDateFormat, oldDateFormat);
-  console.log(monthName);
+  let eachMonthName = eachMonth(startDateFormat, endDateformat);
 
+  // push task and process in
   board.cardObjects.map((d) => {
     testData.tasks.task.push({
-      start: d.date ? d.date.startDate.slice(0, 10).replaceAll("-", "/") : "",
-      end: d.date ? d.date.endDate : "",
+      start: d.date.startDate.slice(0, 10).replaceAll("-", "/"),
+      end: d.date.endDate.slice(0, 10).replaceAll("-", "/"),
     });
     testData.processes.process.push({ label: d.title });
   });
 
-  for (let i = 0; i < newDateFormat2.length; i++) {
+  // push first categories
+  for (let i = 0; i < startMonthDate.length; i++) {
     testData.categories[0].category.push({
-      start: newDateFormat2[i],
-      end: oldDateFormat2[i],
-      label: monthName[i],
+      start: startMonthDate[i],
+      end: endMonthDate[i],
+      label: eachMonthName[i],
     });
   }
 
-  let start = new Date(earlyDateFormat);
-  let end = new Date(oldDateFormat);
-  var sDate;
-  var eDate;
-  var dateArr = [];
-  var startDateArr = [];
-  var endDateArr = [];
+  // get all the start and end week date according to month
+  let start = new Date(startDateFormat);
+  let end = new Date(endDateformat);
+  let sDate;
+  let eDate;
+  let startDateArr = [];
+  let endDateArr = [];
 
   while (start <= end) {
     if (start.getDay() == 1 || (startDateArr.length == 0 && !sDate)) {
@@ -178,16 +180,13 @@ const GanttChart = ({ match }) => {
     start.setDate(start.getDate() + 1);
   }
 
-  console.log(startDateArr);
-  console.log(endDateArr);
-
+  // push final data up
   for (let i = 0; i < startDateArr.length; i++) {
     testData.categories[1].category.push({
       start: startDateArr[i],
       end: endDateArr[i],
     });
   }
-  console.log(testData);
   return (
     <Container>
       <Navbar />
