@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "@material-ui/core";
+
 import { logout } from "../redux/action/auth";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -13,12 +14,22 @@ import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
+		backgroundColor: "#f0b1b1",
 	},
 	menuButton: {
 		marginRight: theme.spacing(2),
 	},
 	title: {
 		flexGrow: 1,
+	},
+	navbar: {
+		backgroundColor: "#f0b1b1",
+		textDecoration: "none",
+	},
+	hyperlink: {
+		color: "white",
+		textDecoration: "none",
+		underlineHover: "none",
 	},
 }));
 
@@ -33,7 +44,7 @@ const Navbar = () => {
 
 	return (
 		<div className={classes.root}>
-			<AppBar position="static">
+			<AppBar className={classes.navbar} position="static">
 				<Toolbar>
 					<IconButton
 						edge="start"
@@ -43,9 +54,12 @@ const Navbar = () => {
 						href="/dashboard"
 					>
 						<HomeRoundedIcon fontSize="large" />
-					</IconButton>
+					</IconButton>{" "}
 					<Typography variant="h4" className={classes.title}>
-						Project Management
+						<Link href="/" className={classes.hyperlink}>
+							{" "}
+							Project Management{" "}
+						</Link>
 					</Typography>
 					{isAuthenticated ? (
 						<Button
@@ -62,6 +76,7 @@ const Navbar = () => {
 							color="inherit"
 							href="/login"
 							size="large"
+							color="secondary"
 							variant="outlined"
 						>
 							<Typography variant="h5">Login</Typography>

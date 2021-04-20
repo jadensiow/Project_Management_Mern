@@ -55,7 +55,7 @@ const Dashboard = () => {
 
         <section className="dashboard">
           <h1>Welcome {user && user.name}</h1>
-          <h2>Your Boards</h2>
+          <h2>Your Projects</h2>
           {loading && <CircularProgress className="dashboard-loading" />}
           <div className="boards">
             {boards.map((board) => (

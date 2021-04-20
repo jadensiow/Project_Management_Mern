@@ -81,34 +81,31 @@ const Board = ({ match }) => {
 						"url(" +
 						(board.backgroundURL
 							? board.backgroundURL
-							: "https://source.unsplash.com/featured/?views&auto=format&fit=crop&w=2689&q=80") +
+							: "https://source.unsplash.com/featured/?scenery,scenery,cities&auto=format&fit=crop&w=2689&q=80") +
 						")",
 				}}
 			>
 				<Navbar />
 				<section className="board">
-					<div>
-						<div className="listOfBtn">
-							<BackgroundButton id="backgroundBtn" board={board} />
-							<Button
-								className="chat"
-								variant="contained"
-								onClick={handleChat}
-								style={{ margin: "5px" }}
-							>
-								Chat Room
-							</Button>
-							<Button
-								className="chart"
-								variant="contained"
-								onClick={handleChart}
-								style={{ margin: "5px" }}
-							>
-								Gantt Chart
-							</Button>
-						</div>
+					<div className="listOfBtn">
+						<BackgroundButton className="backgroundBtn" board={board} />
+						<Button
+							className="chat"
+							variant="contained"
+							onClick={handleChat}
+							style={{ margin: "5px" }}
+						>
+							Chat Room
+						</Button>
+						<Button
+							className="chart"
+							variant="contained"
+							onClick={handleChart}
+							style={{ margin: "5px" }}
+						>
+							Gantt Chart
+						</Button>
 					</div>
-
 					<div className="board-top">
 						<div className="board-top-left">
 							<BoardTitle board={board} />
