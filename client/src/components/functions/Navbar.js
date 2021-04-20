@@ -62,7 +62,6 @@ const Navbar = () => {
 							color="inherit"
 							href="/login"
 							size="large"
-							color="secondary"
 							variant="outlined"
 						>
 							<Typography variant="h5">Login</Typography>
