@@ -14,7 +14,7 @@ const ListSchema = new Schema({
   cards: [
     {
       type: Schema.Types.ObjectId,
-      ref: "cards",
+      ref: "card",
     },
   ],
 });

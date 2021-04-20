@@ -5,6 +5,8 @@ import { addBoard } from "../redux/action/board";
 import { Modal, TextField, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "../styles/modalStyles";
+import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";
+
 
 const CreateBoard = ({ history }) => {
   const classes = useStyles();
@@ -45,18 +47,24 @@ const CreateBoard = ({ history }) => {
   );
 
   return (
-    <div>
-      <button
+    <AnimateSharedLayout type="crossfade">
+    <motion.div>
+      <motion.button
         className="board-card create-board-card"
         onClick={() => setOpen(true)}
       >
         Create new board
-      </button>
+      </motion.button>
+      </motion.div>
+      <AnimatePresence>
+      <motion.div>
       <Modal open={open} onClose={() => setOpen(false)}>
         {body}
       </Modal>
-    </div>
-  );
+      </motion.div>
+      </AnimatePresence>
+    </AnimateSharedLayout>
+  );;
 };
 
 export default withRouter(CreateBoard);

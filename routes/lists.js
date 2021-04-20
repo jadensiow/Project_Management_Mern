@@ -75,7 +75,8 @@ router.get("/:id", auth, async (req, res) => {
     if (!list) {
       return res.status(404).json({ msg: "List not found" });
     }
-
+  
+  
     res.json(list);
   } catch (err) {
     console.error(err.message);

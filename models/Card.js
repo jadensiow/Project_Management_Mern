@@ -13,9 +13,7 @@ const CardSchema = new Schema({
 	description: {
 		type: String,
 	},
-	label: {
-		type: String,
-	},
+	label: { type: String },
 	members: [
 		{
 			_id: false,

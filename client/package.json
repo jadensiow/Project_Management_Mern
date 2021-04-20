@@ -30,10 +30,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "rsuite": "^4.9.3",
     "socket.io-client": "^4.0.1",
-    "sugar": "^2.0.6",
-    "sugar-date": "^2.0.6",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.1"
   },
