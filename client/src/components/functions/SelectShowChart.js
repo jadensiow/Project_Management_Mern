@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getList } from "../redux/action/board";
 
 import {
 	Grid,
@@ -18,10 +17,10 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 
 const options = [];
 
-const SelectShowChart = () => {
-	const [open, setOpen] = useState(false);
+const SelectShowChart = ({ handleMenuItemClick, selectedIndex, setOpen }) => {
+	// const [open, setOpen] = useState(false);
 	const anchorRef = useRef(null);
-	const [selectedIndex, setSelectedIndex] = useState(1);
+	// const [selectedIndex, setSelectedIndex] = useState(1);
 	const history = useHistory();
 	const board = useSelector((state) => state.board.board);
 
@@ -29,12 +28,11 @@ const SelectShowChart = () => {
 		console.info(`You clicked ${options[selectedIndex]}`);
 	};
 
-	const handleMenuItemClick = (event, index) => {
-		setSelectedIndex(index);
-		//dispatch(getList());
-		history.push("/board/:id/gantt_chart/:id");
-		setOpen(false);
-	};
+	// const handleMenuItemClick = (event, index) => {
+	// 	setSelectedIndex(index);
+	// 	history.push("/board/:id/gantt_chart/:id");
+	// 	setOpen(false);
+	// };
 
 	const handleToggle = () => {
 		setOpen((prevOpen) => !prevOpen);
