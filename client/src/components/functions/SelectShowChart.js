@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
@@ -15,24 +14,27 @@ import {
 } from "@material-ui/core";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 
-const options = [];
-
-const SelectShowChart = ({ handleMenuItemClick, selectedIndex, setOpen }) => {
-	// const [open, setOpen] = useState(false);
+const SelectShowChart = ({
+	list,
+	selectedIndex,
+	handleMenuItemClick,
+	open,
+	setOpen,
+}) => {
 	const anchorRef = useRef(null);
-	// const [selectedIndex, setSelectedIndex] = useState(1);
-	const history = useHistory();
+
 	const board = useSelector((state) => state.board.board);
+	const dispatch = useDispatch();
+
+	const options = [];
+
+	list.forEach((element) => {
+		options.push(element.title);
+	});
 
 	const handleClick = () => {
 		console.info(`You clicked ${options[selectedIndex]}`);
 	};
-
-	// const handleMenuItemClick = (event, index) => {
-	// 	setSelectedIndex(index);
-	// 	history.push("/board/:id/gantt_chart/:id");
-	// 	setOpen(false);
-	// };
 
 	const handleToggle = () => {
 		setOpen((prevOpen) => !prevOpen);
@@ -43,7 +45,7 @@ const SelectShowChart = ({ handleMenuItemClick, selectedIndex, setOpen }) => {
 			return;
 		}
 
-		setOpen(false);
+		setOpen((prevOpen) => !prevOpen);
 	};
 
 	return (
@@ -86,13 +88,14 @@ const SelectShowChart = ({ handleMenuItemClick, selectedIndex, setOpen }) => {
 							<Paper>
 								<ClickAwayListener onClickAway={handleClose}>
 									<MenuList id="split-button-menu">
-										{options.map((option, index) => (
+										{list.map((option, index) => (
 											<MenuItem
-												key={option}
+												key={option._id}
+												id={option._id}
 												selected={index === selectedIndex}
-												onClick={(event) => handleMenuItemClick(event, index)}
+												onClick={(event) => handleMenuItemClick(event)}
 											>
-												{option}
+												{option.title}
 											</MenuItem>
 										))}
 									</MenuList>
