@@ -13,6 +13,8 @@ const dataSource = {
 		flatScrollBars: "1",
 		showTaskStartDate: true,
 		showTaskEndDate: true,
+		captionAlignment: "center",
+		showBorder: true,
 	},
 	tasks: {
 		color: "#5D62B5",
