@@ -8,15 +8,14 @@ import Gantt from "fusioncharts/fusioncharts.gantt";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import Navbar from "../functions/Navbar";
 import { getBoard } from "../../components/redux/action/board";
-import dataSource from "../ganttchart/GanttData";
-import SelectShowChart from "../ganttchart/SelectShowChart";
+import SelectShowChart from "../functions/SelectShowChart";
 const moment = require("moment");
 ReactFC.fcRoot(FusionCharts, Gantt, FusionTheme);
 
 const GanttChart = ({ match }) => {
   const board = useSelector((state) => state.board.board);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
+console.log(board)
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }
