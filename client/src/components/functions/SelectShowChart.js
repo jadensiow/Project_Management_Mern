@@ -1,3 +1,4 @@
+
 import React from "react";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import Typography from "@material-ui/core/Typography";
@@ -18,5 +19,6 @@ const SelectShowChart = ({ list, handleMenuItemClick }) => {
 			))}
 		</Breadcrumbs>
 	);
-};
+
+}
 export default SelectShowChart;

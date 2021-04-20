@@ -15,10 +15,10 @@ ReactFC.fcRoot(FusionCharts, Gantt, FusionTheme);
 const GanttChart = ({ match }) => {
 	const history = useHistory();
 
-	const board = useSelector((state) => state.board.board);
 	const list = useSelector((state) => state.board.board.listObjects);
 	const card = useSelector((state) => state.board.board.cardObjects);
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
 
 	let dateFormatter = (date) => {
 		let d = date.getDate();
@@ -190,16 +190,11 @@ const GanttChart = ({ match }) => {
 		}
 	};
 
-	// console.log(board.lists);
-	// console.log(lists);
 
-	// useEffect(() => {
-	// 	dispatch(getBoard(match.params.id));
-	// }, [dispatch, match.params.id]);
 
-	// if (!isAuthenticated) {
-	// 	return <Redirect to="/" />;
-	// }
+	if (!isAuthenticated) {
+		return <Redirect to="/" />;
+ }
 
 	return (
 		<div>

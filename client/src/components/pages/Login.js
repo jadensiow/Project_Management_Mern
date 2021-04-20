@@ -56,7 +56,7 @@ const Login = () => {
     >
       <div
         style={{
-          backgroundColor: "rgb(200, 200, 200)",
+          backgroundColor: "rgb(236, 220, 186)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -67,8 +67,9 @@ const Login = () => {
           <CssBaseline />
           <div>
             <Typography component="h1" variant="h4">
-              Project Management
+              Plan your projects
             </Typography>
+            <br></br>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
