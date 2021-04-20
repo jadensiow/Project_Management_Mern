@@ -5,7 +5,6 @@ import { Redirect, useHistory } from "react-router-dom";
 import Navbar from "../functions/Navbar";
 import { Button } from "@material-ui/core";
 import { motion } from "framer-motion";
-import { CircularProgress, Box } from "@material-ui/core";
 
 import { chatRouteTransition } from "../../animations/routeAnimations";
 

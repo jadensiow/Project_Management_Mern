@@ -81,15 +81,14 @@ const Board = ({ match }) => {
             "url(" +
             (board.backgroundURL
               ? board.backgroundURL
-              : "https://source.unsplash.com/featured/?views&auto=format&fit=crop&w=2689&q=80") +
+              : "https://source.unsplash.com/featured/?scenery,scenery,cities&auto=format&fit=crop&w=2689&q=80") +
             ")",
         }}
       >
         <Navbar />
         <section className="board">
           <div className="listOfBtn">
-            <BackgroundButton id="backgroundBtn" board={board} />
-            <br></br>
+            <BackgroundButton className="backgroundBtn" board={board} />
             <Button className="chat" variant="contained" onClick={handleChat}>
               Chat Room
             </Button>

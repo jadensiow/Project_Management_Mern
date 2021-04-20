@@ -125,7 +125,7 @@ body {
 }
 
 .dashboard .board-card:hover {
-  background-color: #e0e694;
+  background-color: #d89b9b;
 }
 
 .dashboard .create-board-card {
@@ -160,8 +160,8 @@ body {
   justify-content: flex-start;
 }
 
-.backgroundBtn {
-  margin-right: 100px;
+#backgroundBtn {
+  padding-right: 100px;
 }
 
 .board {

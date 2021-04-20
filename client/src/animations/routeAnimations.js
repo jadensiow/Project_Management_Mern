@@ -97,3 +97,22 @@ export const chatRouteTransition = {
     },
   },
 };
+export const chartRouteTransition = {
+  hidden: {
+    x: "-100vw",
+  },
+
+  show: {
+    x: 0,
+    transition: {
+      duration: 1,
+    },
+  },
+
+  exit: {
+    x: "100vw",
+    transition: {
+      duration: 2,
+    },
+  },
+};
