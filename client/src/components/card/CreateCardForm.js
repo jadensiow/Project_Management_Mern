@@ -18,13 +18,13 @@ const CreateCardForm = ({ listId, setAdding }) => {
 		formRef && formRef.current && formRef.current.scrollIntoView();
 	}, [title]);
 
+
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		dispatch(addCard({ title, listId, startDate, endDate }));
 		setTitle("");
 	};
-	console.log(startDate);
-	console.log(endDate);
+	
 	return (
 		<form
 			ref={formRef}
@@ -46,6 +46,7 @@ const CreateCardForm = ({ listId, setAdding }) => {
 					/>
 				</CardContent>
 			</Card>
+
 
 			<div className="card-actions">
 				<Button
