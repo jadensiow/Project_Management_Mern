@@ -45,6 +45,11 @@ const App = () => {
           <Route exact path="/board/:id" component={Board} />
           <Route exact path="/board/:id/chat" component={Chat} />
           <Route exact path="/board/:id/gantt_chart" component={GanttChart} />
+          <Route
+            exact
+            path="/board/:id/gantt_chart/:id"
+            component={GanttChart}
+          />
         </Switch>
       </AnimatePresence>
     </>
