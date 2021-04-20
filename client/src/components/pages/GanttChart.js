@@ -8,8 +8,8 @@ import Gantt from "fusioncharts/fusioncharts.gantt";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 import Navbar from "../functions/Navbar";
 import { getBoard } from "../../components/redux/action/board";
-import dataSource from "../ganttChart/GanttData";
-import SelectShowChart from "../ganttChart/SelectShowChart";
+import dataSource from "../ganttchart/GanttData";
+import SelectShowChart from "../ganttchart/SelectShowChart";
 const moment = require("moment");
 ReactFC.fcRoot(FusionCharts, Gantt, FusionTheme);
 
