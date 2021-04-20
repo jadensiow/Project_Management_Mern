@@ -45,7 +45,7 @@ export const dashboardRouteTransition = {
   show: {
     y: 0,
     transition: {
-      delayChildren: 5,
+      delayChildren: 2,
 
       duration: 2,
     },
@@ -61,25 +61,6 @@ export const dashboardRouteTransition = {
 
 export const boardRouteTransition = {
   hidden: {
-    x: "100vw",
-  },
-
-  show: {
-    x: 0,
-    transition: {
-      duration: 1,
-    },
-  },
-
-  exit: {
-    x: "-100vw",
-    transition: {
-      duration: 0.75,
-    },
-  },
-};
-export const chatRouteTransition = {
-  hidden: {
     x: "-100vw",
   },
 
@@ -91,9 +72,28 @@ export const chatRouteTransition = {
   },
 
   exit: {
-    x: "+100vw",
+    x: "-100vw",
     transition: {
-      duration: 1.5,
+      duration: 2,
+    },
+  },
+};
+export const chatRouteTransition = {
+  hidden: {
+    x: "-100vw",
+  },
+
+  show: {
+    x: 0,
+    transition: {
+      duration: 1,
+    },
+  },
+
+  exit: {
+    x: "100vw",
+    transition: {
+      duration: 2,
     },
   },
 };

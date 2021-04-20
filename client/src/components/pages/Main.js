@@ -20,7 +20,7 @@ const Main = () => {
   }
 
   return (
-    <section className="landing">
+    <section className="main">
       <nav className="top">
         <h2>Project Management</h2>
         <div>
@@ -32,7 +32,7 @@ const Main = () => {
           </Button>
         </div>
       </nav>
-      <div className="landing-inner">
+      <div className="main-inner">
         <h1>Project Management</h1>
         <p>Manage your project better!</p>
         <div className="buttons">

@@ -18,15 +18,9 @@ const GanttChart = ({ match }) => {
 	const [open, setOpen] = useState(false);
 	const history = useHistory();
 
-	const board = useSelector((state) => state.board.board);
 	const list = useSelector((state) => state.board.board.listObjects);
 	const card = useSelector((state) => state.board.board.cardObjects);
-	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-	const dispatch = useDispatch();
 
-	const currentIndex = (index) => {
-		setSelectedIndex(index);
-	};
 
 	const currentOpen = (bool) => {
 		setOpen(bool);

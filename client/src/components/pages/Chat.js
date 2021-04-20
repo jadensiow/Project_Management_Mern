@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Container, Col, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { Redirect, useHistory } from "react-router-dom";
 import Navbar from "../functions/Navbar";
 import { Button } from "@material-ui/core";
@@ -101,14 +101,7 @@ const Chat = () => {
     return <Redirect to="/" />;
   }
 
-  return !boards ? (
-    <>
-      <Navbar />
-      <Box className="board-loading">
-        <CircularProgress />
-      </Box>
-    </>
-  ) : (
+  return (
     <motion.div
       variants={chatRouteTransition}
       initial="hidden"
@@ -116,100 +109,119 @@ const Chat = () => {
       exit="exit"
       className="outer-div"
     >
-      {" "}
       <Navbar />
       <Container className="chat clearfix">
         <Button id="backpage" variant="contained" onClick={handleBack}>
           Back To Board
         </Button>
-        <div id="user-list">
-          <h4>
-            <b>Project Chatrooms</b>
-          </h4>
-          <ul style={{ listStyleType: "none" }} className="clearfix">
-            {boards.map((board) => {
-              return (
-                <li
-                  onClick={enterRoom}
-                  style={{ cursor: "pointer" }}
-                  key={board._id}
-                >
-                  <h4>{board.title}</h4>
-                  <hr className="line" size="8" width="100%"></hr>
-                </li>
-              );
-            })}
-          </ul>
 
-          <h4 className="name">
-            <b>Online Users: </b>
-          </h4>
-          <ul style={{ listStyleType: "none" }} className="clearfix">
-            {chatUsers.map((user) => {
-              return (
-                <li
-                  onClick={enterRoom}
-                  style={{ cursor: "pointer" }}
-                  key={user}
-                >
-                  <span className=" onlineStatus">
-                    {" "}
-                    <h4>{user}</h4>
-                    <StyledBadge
-                      className="light"
-                      overlap="circle"
-                      anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "right",
-                      }}
-                      variant="dot"
-                      marginLeft="20rem"
-                    ></StyledBadge>
-                  </span>
-                  <hr className="line" size="8" width="100%"></hr>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <div className="messages">
-          <h4 className="room"> Chat Messages ({currentRoom}) Room </h4>
-          <form onSubmit={onSubmit}>
-            <input
-              type="text"
-              name="msg"
-              value={chatMessage.msg}
-              onChange={handleChange}
-              required
-              style={{ width: "80%" }}
-            />
-            <input className="msgSendBtn" type="submit" value="Send" />
-          </form>
-          <div id="chatMessages" style={{ border: "1px solid black" }}>
-            Messages
-            <ul style={{ listStyle: "none" }}>
-              {msgList.map((msgList, index) => {
+        <div className="chat-wrapper">
+          <div id="user-list">
+            <h4>
+              <b>Project Chatrooms</b>
+            </h4>
+            <ul style={{ listStyleType: "none" }} className="clearfix">
+              {boards.map((board) => {
                 return (
-                  <li key={index}>
-                    <b>
-                      {msgList.isPM
-                        ? `PM from ${msgList.name}: `
-                        : `${msgList.name}: `}
-                    </b>
-
-                    <i>
-                      <span style={{ color: msgList.isPM ? "red" : "black" }}>
-                        {""}
-                        {msgList.msg}
-                      </span>
-                    </i>
+                  <li
+                    onClick={enterRoom}
+                    style={{ cursor: "pointer" }}
+                    key={board._id}
+                  >
+                    <h4>{board.title}</h4>
+                    <hr className="line" size="8" width="100%"></hr>
                   </li>
                 );
               })}
             </ul>
-          </div>{" "}
+
+            <h4 className="name">
+              <strong>Online Users</strong>
+            </h4>
+            <ul style={{ listStyleType: "none" }} className="clearfix">
+              {chatUsers.map((user) => {
+                return (
+                  <li
+                    onClick={enterRoom}
+                    style={{ cursor: "pointer" }}
+                    key={user}
+                  >
+                    <span className="onlineStatus">
+                      <StyledBadge
+                        className="light"
+                        overlap="circle"
+                        anchorOrigin={{
+                          vertical: "bottom",
+                          horizontal: "right",
+                        }}
+                        variant="dot"
+                        style={{ marginRight: "1rem" }}
+                      ></StyledBadge>
+                      <h4>{user}</h4>
+                    </span>
+                    <hr className="line" size="8" width="100%"></hr>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="chat-messages-container">
+            <h4 className="room-name"> Chat Messages ({currentRoom}) Room </h4>
+            <div id="chatMessages">
+              {msgList.map((msgList, index) => {
+                const odd = index % 2 !== 0;
+                return (
+                  <div
+                    key={index}
+                    style={{ width: "100%", minHeight: "100px" }}
+                  >
+                    <div className={odd ? "left-align" : "right-align"}>
+                      <div>
+                        <div className="sender-name">
+                          <span
+                            className="circle-div"
+                            style={{
+                              backgroundColor: odd ? "#86BB71" : "#94C2ED",
+                            }}
+                          ></span>
+                          <strong>
+                            {msgList.isPM
+                              ? `PM from ${msgList.name}`
+                              : `${msgList.name}`}
+                          </strong>
+                        </div>
+
+                        <div
+                          className={`single-msg  ${
+                            odd ? "not-my-msg" : "my-msg"
+                          }`}
+                        >
+                          <em>
+                            <span style={{ color: "white" }}>
+                              {msgList.msg}
+                            </span>
+                          </em>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <form onSubmit={onSubmit} id="message-input">
+              <input
+                type="text"
+                name="msg"
+                value={chatMessage.msg}
+                onChange={handleChange}
+                required
+                style={{ width: "80%" }}
+              />
+              <input className="msgSendBtn" type="submit" value="Send" />
+            </form>
+          </div>
         </div>
-      </Container>{" "}
+      </Container>
     </motion.div>
   );
 };

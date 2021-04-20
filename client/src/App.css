@@ -26,58 +26,59 @@ body {
 }
 
 .navbar a:hover {
-  opacity: 3;
+  opacity: 1;
+  color: black;
 }
 
-.landing {
+.main {
   height: 100vh;
-  color: white;
+  color: rgb(236, 220, 186);
   text-align: center;
-  background: linear-gradient(135deg, #0079bf, #5067c5);
+  background: linear-gradient(135deg, #bfe6a5, #5083c5);
 }
 
-.landing .top {
+.main .top {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 20px;
 }
 
-.landing .landing-inner {
+.main .main-inner {
   align-items: center;
   display: flex;
   flex-direction: column;
   padding: 150px 50px;
 }
 
-.landing h1 {
+.main h1 {
   font-size: 5rem;
   margin-bottom: 20px;
 }
 
-.landing p {
+.main p {
   font-size: 1.5rem;
   margin-bottom: 20px;
 }
 
-.landing p a {
+.main p a {
   text-decoration: none;
   color: lightgrey;
   transition: 0.3s;
 }
 
-.landing p a:hover {
+.main p a:hover {
   color: darkgrey;
 }
 
 @media (max-width: 700px) {
-  .landing h1 {
+  .main h1 {
     font-size: 3.5rem;
   }
 }
 
 .dashboard-and-navbar .navbar {
-  background-color: #026aa7;
+  background-color: #f0b1b1;
 }
 
 .dashboard {
@@ -120,11 +121,11 @@ body {
   font-weight: 500;
   color: white;
   border-radius: 10px;
-  background-color: #5067c5;
+  background-color: #ebaa85;
 }
 
 .dashboard .board-card:hover {
-  background-color: #4057b5;
+  background-color: #e0e694;
 }
 
 .dashboard .create-board-card {
@@ -423,8 +424,8 @@ body {
   .card-bottom
   .card-member-avatars
   .avatar {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   font-size: 0.8rem;
   background-color: #ddd;
 }
