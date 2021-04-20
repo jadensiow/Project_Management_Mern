@@ -18,7 +18,7 @@
 //   },
 // };
 
-export const routeTransition = {
+export const loginRouteTransition = {
   hidden: {
     x: "-100vw",
   },
@@ -34,6 +34,66 @@ export const routeTransition = {
     x: "100vw",
     transition: {
       duration: 0.75,
+    },
+  },
+};
+export const dashboardRouteTransition = {
+  hidden: {
+    y: "-100vw",
+  },
+
+  show: {
+    y: 0,
+    transition: {
+      delayChildren: 5,
+
+      duration: 2,
+    },
+  },
+
+  exit: {
+    x: "-100vw",
+    transition: {
+      duration: 1.5,
+    },
+  },
+};
+
+export const boardRouteTransition = {
+  hidden: {
+    x: "100vw",
+  },
+
+  show: {
+    x: 0,
+    transition: {
+      duration: 1,
+    },
+  },
+
+  exit: {
+    x: "-100vw",
+    transition: {
+      duration: 0.75,
+    },
+  },
+};
+export const chatRouteTransition = {
+  hidden: {
+    x: "-100vw",
+  },
+
+  show: {
+    x: 0,
+    transition: {
+      duration: 2,
+    },
+  },
+
+  exit: {
+    x: "+100vw",
+    transition: {
+      duration: 1.5,
     },
   },
 };

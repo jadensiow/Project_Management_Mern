@@ -2,7 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -10,8 +10,6 @@ body {
   background-color: #eee;
   color: #333;
 }
-
-
 
 .navbar {
   display: flex;
@@ -23,12 +21,12 @@ body {
 .navbar a {
   text-decoration: none;
   color: white;
-  font-size: 1rem;
+  font-size: 3rem;
   opacity: 0.7;
 }
 
 .navbar a:hover {
-  opacity: 1;
+  opacity: 3;
 }
 
 .landing {
@@ -110,6 +108,7 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  font-size: 15px;
 }
 
 .dashboard .board-card {
@@ -153,6 +152,15 @@ body {
 .board-loading {
   text-align: center;
   margin-top: 20%;
+}
+.listOfBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.backgroundBtn {
+  margin-right: 100px;
 }
 
 .board {
@@ -247,7 +255,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 
 .board .lists {
   display: flex;
@@ -366,7 +373,14 @@ body {
   margin: auto;
 }
 
-.board .lists .list-wrapper .list .cards .card .checklist-indicator .checklist-indicator-icon {
+.board
+  .lists
+  .list-wrapper
+  .list
+  .cards
+  .card
+  .checklist-indicator
+  .checklist-indicator-icon {
   margin-right: 2px;
 }
 
@@ -388,19 +402,42 @@ body {
   display: flex;
 }
 
-.board .lists .list-wrapper .list .cards .card .card-bottom .card-member-avatars {
+.board
+  .lists
+  .list-wrapper
+  .list
+  .cards
+  .card
+  .card-bottom
+  .card-member-avatars {
   display: flex;
   flex-wrap: wrap;
 }
 
-.board .lists .list-wrapper .list .cards .card .card-bottom .card-member-avatars .avatar {
+.board
+  .lists
+  .list-wrapper
+  .list
+  .cards
+  .card
+  .card-bottom
+  .card-member-avatars
+  .avatar {
   width: 30px;
   height: 30px;
   font-size: 0.8rem;
   background-color: #ddd;
 }
 
-.board .lists .list-wrapper .list .cards .card .card-bottom .card-member-avatars .avatar:hover {
+.board
+  .lists
+  .list-wrapper
+  .list
+  .cards
+  .card
+  .card-bottom
+  .card-member-avatars
+  .avatar:hover {
   background-color: #ccc;
 }
 

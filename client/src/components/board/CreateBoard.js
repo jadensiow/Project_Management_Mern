@@ -51,6 +51,7 @@ const CreateBoard = ({ history }) => {
       <button
         className="board-card create-board-card"
         onClick={() => setOpen(true)}
+        style={{ fontSize: "15px" }}
       >
         Create new board
       </button>
