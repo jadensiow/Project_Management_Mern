@@ -58,6 +58,7 @@ io.on("connection", (socket) => {
     // forward message to connected client
     // and only link it up to the same room name
     console.log("newmessage", newMessage);
+    // emit back to frontend newMessage
     io.to(newMessage.room).emit("newMessage", {
       name: newMessage.name,
       msg: newMessage.msg,

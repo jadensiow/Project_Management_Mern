@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Container } from "react-bootstrap";
 import { Redirect, useHistory } from "react-router-dom";
 import Navbar from "../functions/Navbar";
-
 import { Button } from "@material-ui/core";
 import { motion } from "framer-motion";
 import { chatRouteTransition } from "../../animations/routeAnimations";
@@ -11,52 +10,45 @@ import { chatRouteTransition } from "../../animations/routeAnimations";
 import io from "socket.io-client";
 import "../styles/chat.css";
 import StyledBadge from "../styles/onlinelight";
-
 const socket = io();
 
 const Chat = () => {
-  const chatMessagesDiv = useRef();
-
   useEffect(() => {
     document.title = "Chatrooms";
   }, []);
 
   const { user, isAuthenticated } = useSelector((state) => state.auth);
-
   const boards = useSelector((state) => state.board.boards);
+  const pageID = useSelector((state) => state.board.board);
+  const [inputMessage, setInputMessage] = useState("");
 
   const [chatUsers, setChatUsers] = useState([]);
-  const [inputMessage, setInputMessage] = useState("");
+
   const [msgList, setMsgList] = useState([]);
   const [currentRoom, setCurrentRoom] = useState("General");
-  const pageID = useSelector((state) => state.board.board);
-
   let history = useHistory();
 
   useEffect(() => {
     socket.emit("userJoin", user.name);
-
-    return () => {
-      socket.disconnect();
-    };
   }, []);
+useEffect(()=>{
+	socket.on("newMessage", (newMessage) => {
+		// return message
+		setMsgList((m) => [...m, { ...newMessage }]);
+	  });
+}[socket])
+ 
 
-  useEffect(() => {
-    socket.on("newMessage", (newMessage) => {
-      // return message
-      setMsgList((m) => [...m, { ...newMessage }]);
+  // whenever send from server and set it
+  socket.on("listOfUsers", (listOfUsers) => {
+    setChatUsers(listOfUsers);
+  });
 
-      chatMessagesDiv.current.scrollTop = chatMessagesDiv.current.scrollHeight;
-    });
-    // whenever send from server and set it
-    socket.on("listOfUsers", (listOfUsers) => {
-      setChatUsers(listOfUsers);
-    });
-  }, [socket]);
-
+  // const checkTime = () => {
+  //   setTimeStamp(new Date().toLocaleString());
+  // };
   const onSubmit = (e) => {
     e.preventDefault();
-
     const newMessage = {
       name: user.name,
       msg: inputMessage,
@@ -64,12 +56,10 @@ const Chat = () => {
       isPM: checkPM(currentRoom, chatUsers),
     };
 
+
     // Once confirm sent out need to check backend
     socket.emit("newMessage", newMessage);
-
-    setInputMessage("");
   };
-
   const enterRoom = (e) => {
     let oldRoom = currentRoom;
     let newRoom = e.target.textContent;
@@ -95,6 +85,7 @@ const Chat = () => {
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }
+
   return (
     <motion.div
       variants={chatRouteTransition}
@@ -103,12 +94,12 @@ const Chat = () => {
       exit="exit"
       className="outer-div"
     >
-      {" "}
       <Navbar />
-      <Button id="backpage" variant="contained" onClick={handleBack}>
-        Back To Board
-      </Button>
       <Container className="chat clearfix">
+        <Button id="backpage" variant="contained" onClick={handleBack}>
+          Back To Board
+        </Button>
+
         <div className="chat-wrapper">
           <div id="user-list">
             <h4>
@@ -161,7 +152,7 @@ const Chat = () => {
           </div>
           <div className="chat-messages-container">
             <h4 className="room-name"> Chat Messages ({currentRoom}) Room </h4>
-            <div id="chatMessages" ref={chatMessagesDiv}>
+            <div id="chatMessages">
               {msgList.map((msgList, index) => {
                 let odd;
                 msgList.name === user.name ? (odd = false) : (odd = true);
@@ -182,12 +173,8 @@ const Chat = () => {
                           <strong>
                             {msgList.isPM
                               ? `PM from ${msgList.name}`
-                              : `${msgList.name}`}
+                              : `${msgList.name} ${msgList.time}`}
                           </strong>
-
-                          <span style={{ marginLeft: "0.5rem" }}>
-                            {msgList.time}
-                          </span>
                         </div>
 
                         <div
@@ -216,7 +203,7 @@ const Chat = () => {
                 required
                 style={{ width: "80%" }}
               />
-              <input className="msg-Send" type="submit" value="Send" />
+              <input className="msgSendBtn" type="submit" value="Send" />
             </form>
           </div>
         </div>

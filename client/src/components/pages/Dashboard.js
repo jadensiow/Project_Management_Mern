@@ -11,7 +11,7 @@ import { dashboardRouteTransition } from "../../animations/routeAnimations";
 
 const Dashboard = () => {
   useEffect(() => {
-    document.title = "Summary";
+    document.title = "Projects";
   }, []);
   useEffect(() => {
     return () => {
