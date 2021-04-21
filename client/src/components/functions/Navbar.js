@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 	hyperlink: {
 		color: "white",
+		"&:hover": {
+			boxShadow: "0 0 0 10px #83E0B1",
+		},
+		borderRadius: "10px",
 	},
 }));
 
