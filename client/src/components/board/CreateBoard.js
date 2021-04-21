@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { addBoard } from "../redux/action/board";
-import { Modal as div, TextField, Button } from "@material-ui/core";
+import { Modal, TextField, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "../styles/modalStyles";
 import { AnimatePresence, motion } from "framer-motion";
@@ -63,16 +63,9 @@ const CreateBoard = ({ history }) => {
             animate="show"
             exit="exit"
           >
-            <div
-              style={{
-                position: "fixed",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-              }}
-            >
+            <Modal open={open} onClose={() => setOpen(false)}>
               {body}
-            </div>
+            </Modal>
           </motion.div>
         )}
       </AnimatePresence>
