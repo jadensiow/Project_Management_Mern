@@ -5,7 +5,6 @@ import { Redirect, useHistory } from "react-router-dom";
 import Navbar from "../functions/Navbar";
 import { Button } from "@material-ui/core";
 import { motion } from "framer-motion";
-
 import { chatRouteTransition } from "../../animations/routeAnimations";
 
 import io from "socket.io-client";
@@ -26,8 +25,6 @@ const Chat = () => {
   const [chatMessage, setchatMessage] = useState({
     name: "",
     msg: "",
-    room: "",
-    isPM: false,
   });
   const [msgList, setMsgList] = useState([]);
   const [currentRoom, setCurrentRoom] = useState("General");
@@ -41,7 +38,12 @@ const Chat = () => {
     // return message
     setMsgList([
       ...msgList,
-      { name: newMessage.name, msg: newMessage.msg, isPM: newMessage.isPM },
+      {
+        name: newMessage.name,
+        msg: newMessage.msg,
+        isPM: newMessage.isPM,
+        time: newMessage.time,
+      },
     ]);
   });
 
@@ -54,7 +56,9 @@ const Chat = () => {
   const handleChange = (e) => {
     setchatMessage({ ...chatMessage, [e.target.name]: e.target.value });
   };
-
+  // const checkTime = () => {
+  //   setTimeStamp(new Date().toLocaleString());
+  // };
   const onSubmit = (e) => {
     e.preventDefault();
     const newMessage = {
@@ -62,6 +66,7 @@ const Chat = () => {
       msg: chatMessage.msg,
       room: currentRoom,
       isPM: checkPM(currentRoom, chatUsers),
+      time: "",
     };
 
     //console.log("Just Sent: ", newMessage);
@@ -168,7 +173,9 @@ const Chat = () => {
             <h4 className="room-name"> Chat Messages ({currentRoom}) Room </h4>
             <div id="chatMessages">
               {msgList.map((msgList, index) => {
-                const odd = index % 2 !== 0;
+                console.log(msgList);
+                let odd;
+                msgList.name === user.name ? (odd = false) : (odd = true);
                 return (
                   <div
                     key={index}
@@ -186,7 +193,7 @@ const Chat = () => {
                           <strong>
                             {msgList.isPM
                               ? `PM from ${msgList.name}`
-                              : `${msgList.name}`}
+                              : `${msgList.name} ${msgList.time}`}
                           </strong>
                         </div>
 

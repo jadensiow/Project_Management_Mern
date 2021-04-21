@@ -57,11 +57,12 @@ io.on("connection", (socket) => {
   socket.on("newMessage", (newMessage) => {
     // forward message to connected client
     // and only link it up to the same room name
-    console.log(newMessage);
+    console.log("newmessage", newMessage);
     io.to(newMessage.room).emit("newMessage", {
       name: newMessage.name,
       msg: newMessage.msg,
       isPM: newMessage.isPM,
+      time: new Date().toLocaleString(),
     });
   });
 
