@@ -14,7 +14,6 @@ import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
-		backgroundColor: "#f0b1b1",
 	},
 	menuButton: {
 		marginRight: theme.spacing(2),
@@ -23,13 +22,10 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1,
 	},
 	navbar: {
-		backgroundColor: "#f0b1b1",
-		textDecoration: "none",
+		backgroundColor: "#88E9B8",
 	},
 	hyperlink: {
 		color: "white",
-		textDecoration: "none",
-		underlineHover: "none",
 	},
 }));
 
@@ -56,9 +52,8 @@ const Navbar = () => {
 						<HomeRoundedIcon fontSize="large" />
 					</IconButton>{" "}
 					<Typography variant="h4" className={classes.title}>
-						<Link href="/" className={classes.hyperlink}>
-							{" "}
-							Project Management{" "}
+						<Link href="/" className={classes.hyperlink} underline="none">
+							Project Management
 						</Link>
 					</Typography>
 					{isAuthenticated ? (
@@ -66,20 +61,19 @@ const Navbar = () => {
 							color="inherit"
 							href="/"
 							onClick={() => dispatch(logout())}
-							size="large"
+							size="default"
 							variant="outlined"
 						>
-							<Typography variant="h5">Logout</Typography>
+							<Typography variant="h6">Logout</Typography>
 						</Button>
 					) : (
 						<Button
 							color="inherit"
 							href="/login"
-							size="large"
-							color="secondary"
+							size="default"
 							variant="outlined"
 						>
-							<Typography variant="h5">Login</Typography>
+							<Typography variant="h6">Login</Typography>
 						</Button>
 					)}
 				</Toolbar>
