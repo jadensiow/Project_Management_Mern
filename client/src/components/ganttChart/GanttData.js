@@ -1,7 +1,7 @@
 const dataSource = {
 	chart: {
 		dateformat: "yyyy/mm/dd",
-		caption: "Event Planning Process",
+		caption: "TIMELINE",
 		theme: "Candy",
 		outputdateformat: "ddds mns yy",
 		ganttwidthpercent: "60",
