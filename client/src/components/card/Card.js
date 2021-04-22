@@ -102,7 +102,7 @@ const Card = ({ cardId, list, index }) => {
                     style={{ backgroundColor: card.label }}
                   />
                 )}
-                <p>{card.title}</p>
+                <h4>{card.title}</h4>
                 <p>Start: {dateFormat(card.date.startDate)}</p>
                 <p>End: {dateFormat(card.date.endDate)}</p>
 

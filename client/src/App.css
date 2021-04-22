@@ -8,26 +8,7 @@
 body {
   font-size: 1rem;
   background-color: #eee;
-  color: #88e9b93b;
-}
-
-.navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-.navbar a {
-  text-decoration: none;
-  color: white;
-  font-size: 3rem;
-  opacity: 0.7;
-}
-
-.navbar a:hover {
-  opacity: 1;
-  color: black;
+  color: #333;
 }
 
 .main {
@@ -77,21 +58,11 @@ body {
   }
 }
 
-.dashboard-and-navbar .navbar {
-  background-color: #f0b1b1;
-}
-
 .dashboard {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 50px;
-}
-#dashboard-create {
-  position: fixed;
-  top: -1000%;
-  left: -200%;
-  transform: translate(-50%, -50%);
 }
 
 .dashboard h1 {
@@ -123,9 +94,10 @@ body {
 .dashboard .board-card {
   width: 220px;
   height: 120px;
-  padding: 20px 50px 20px 20px;
+  padding: 20px 20px 20px 20px;
   margin: 20px;
   text-decoration: none;
+  text-align: center;
   font-weight: 500;
   color: white;
   border-radius: 10px;
@@ -152,10 +124,6 @@ body {
 .board-and-navbar {
   background-size: cover;
   height: 100vh;
-}
-
-.board-and-navbar .navbar {
-  background-color: rgba(50, 50, 50, 0.4);
 }
 
 .board-loading {
