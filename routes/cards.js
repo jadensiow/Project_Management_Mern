@@ -93,6 +93,9 @@ router.get("/:id", auth, async (req, res) => {
 router.patch("/edit/:id", [auth, member], async (req, res) => {
   try {
     const { title, description, label } = req.body;
+    const { startDate, endDate } = req.body.date;
+    console.log("description", req.body.description);
+    console.log("startDate", req.body.date.startDate);
     if (title === "") {
       return res.status(400).json({ msg: "Title is required" });
     }
@@ -105,10 +108,15 @@ router.patch("/edit/:id", [auth, member], async (req, res) => {
     card.title = title ? title : card.title;
     if (description || description === "") {
       card.description = description;
+      card.date.startDate = startDate;
+      card.date.endDate = endDate;
+      console.log("run");
     }
+
     if (label || label === "none") {
       card.label = label;
     }
+    console.log("cardding", card);
     await card.save();
 
     res.json(card);

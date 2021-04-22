@@ -5,10 +5,6 @@ import { setAlert } from "../redux/action/alert";
 import { useHistory, Redirect } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
-// Animation
-import { motion } from "framer-motion";
-import { chartRouteTransition } from "../../animations/routeAnimations";
-
 // libraries
 import moment from "moment";
 import ReactFC from "react-fusioncharts";
@@ -216,13 +212,7 @@ const GanttChart = ({ match }) => {
   }
 
   return (
-    <motion.div
-      variants={chartRouteTransition}
-      initial="hidden"
-      animate="show"
-      exit="exit"
-      className="outer-div"
-    >
+    <>
       <div>
         <div>
           <Navbar />
@@ -253,7 +243,7 @@ const GanttChart = ({ match }) => {
           dataSource={dataSource}
         />
       </div>
-    </motion.div>
+    </>
   );
 };
 

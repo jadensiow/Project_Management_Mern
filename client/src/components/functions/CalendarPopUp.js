@@ -7,7 +7,7 @@ import { DateRangePicker } from "react-date-range";
 import { Button } from "@material-ui/core";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-
+import moment from "moment";
 const CalendarPopUp = (props) => {
   const [selectionRange, setSelectionRange] = useState({
     startDate: new Date(),
@@ -34,8 +34,8 @@ const CalendarPopUp = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    props.startDateCard(selectionRange.startDate);
-    props.endDateCard(selectionRange.endDate);
+    moment(props.startDateCard(selectionRange.startDate)).toDate();
+    moment(props.endDateCard(selectionRange.endDate)).toDate();
     props.setShowCalendar(false);
   };
 

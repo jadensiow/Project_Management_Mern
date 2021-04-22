@@ -1,5 +1,5 @@
 // Hooks and Redux
-import { Fragment, useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // Libraries
@@ -32,6 +32,7 @@ const Card = ({ cardId, list, index }) => {
   const card = useSelector((state) =>
     state.board.board.cardObjects.find((object) => object._id === cardId)
   );
+
   const dateFormat = (e) => {
     let newDate = e.split("-");
     let updatedDate = `${newDate[2].slice(0, 2)}-${newDate[1]}-${newDate[0]}`;
