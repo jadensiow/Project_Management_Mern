@@ -69,8 +69,13 @@ const Login = () => {
 								Plan your projects
 							</Typography>
 						</div>
-						<br></br>
-						<div style={{ display: "flex", justifyContent: "center" }}>
+						<div
+							style={{
+								display: "flex",
+								justifyContent: "center",
+								marginBottom: 10,
+							}}
+						>
 							<Typography component="h1" variant="h5">
 								Sign in
 							</Typography>

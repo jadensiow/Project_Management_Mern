@@ -1,8 +1,8 @@
 const Board = require("../models/Board");
 
-var express = require("express");
-var cors = require("cors");
-var app = express();
+let express = require("express");
+let cors = require("cors");
+let app = express();
 
 app.use(cors());
 

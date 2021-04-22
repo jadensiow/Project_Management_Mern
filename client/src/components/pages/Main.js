@@ -3,9 +3,6 @@ import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
-// Components
-import Navbar from "../functions/Navbar";
-
 // Material UI
 import { Button } from "@material-ui/core";
 
@@ -25,15 +22,19 @@ const Main = () => {
 			<nav className="top">
 				<h2>Project Management</h2>
 				<div>
-					<Button color="inherit" href="/login">
+					<Button
+						variant="outlined"
+						color="inherit"
+						href="/login"
+						style={{ marginRight: 10 }}
+					>
 						Login
 					</Button>
-					<Button variant="contained" href="/register">
+					<Button variant="outlined" color="inherit" href="/register">
 						Register
 					</Button>
 				</div>
 			</nav>
-			<Navbar />
 			<div className="main-inner">
 				<h1>Project Management</h1>
 				<p>Manage your project better!</p>

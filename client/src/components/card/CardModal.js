@@ -1,6 +1,6 @@
 // Hooks and redux
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { editCard } from "../redux/action/board";
 
 // Libraries
@@ -8,18 +8,28 @@ import PropTypes from "prop-types";
 import { GithubPicker } from "react-color";
 import { Modal, TextField, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
+import moment from "moment";
 
 // Components
 import useStyles from "../styles/modalStyles";
 import DeleteCard from "./CardDelete";
 import CardMembers from "./CardMembers";
+import CalendarPopUp from "../functions/CalendarPopUp";
 
 const CardModal = ({ cardId, open, setOpen, card, list }) => {
   const classes = useStyles();
   const [title, setTitle] = useState(card.title);
   const [description, setDescription] = useState(card.description);
-  const dispatch = useDispatch();
 
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const checkCard = useSelector((state) =>
+    state.board.board.cardObjects.find((object) => object._id === cardId)
+  );
+  console.log(moment(startDate).format("L"));
+  console.log(moment(checkCard.date.startDate, "ddMM/yyyy"));
+  const dispatch = useDispatch();
   useEffect(() => {
     setTitle(card.title);
     setDescription(card.description);
@@ -27,7 +37,9 @@ const CardModal = ({ cardId, open, setOpen, card, list }) => {
 
   const onTitleDescriptionSubmit = async (e) => {
     e.preventDefault();
-    dispatch(editCard(cardId, { title, description }));
+    dispatch(
+      editCard(cardId, { title, description, date: { startDate, endDate } })
+    );
   };
 
   return (
@@ -69,7 +81,12 @@ const CardModal = ({ cardId, open, setOpen, card, list }) => {
             disabled={
               title === card.title &&
               (description === card.description ||
-                (description === "" && !card.description))
+                (description === "" && !card.description)) &&
+              (startDate === "" ||
+                (moment(checkCard.date.startDate).format("L") ===
+                  moment(startDate).format("L") &&
+                  moment(checkCard.date.endDate).format("L") ===
+                    moment(endDate).format("L")))
             }
             className={classes.button}
           >
@@ -79,6 +96,38 @@ const CardModal = ({ cardId, open, setOpen, card, list }) => {
         <div className={classes.modalSection}>
           <CardMembers card={card} />
           <div>
+            <p>
+              Start:{" "}
+              {startDate === ""
+                ? moment(checkCard.date.startDate).format("L")
+                : moment(startDate).format("L")}
+            </p>
+            <p>
+              End:{" "}
+              {endDate === ""
+                ? moment(checkCard.date.endDate).format("L")
+                : moment(endDate).format("L")}
+            </p>
+            <br></br>
+            <div className="card-actions">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setShowCalendar(!showCalendar);
+                }}
+              >
+                Edit Date
+              </Button>
+              {showCalendar && (
+                <CalendarPopUp
+                  setShowCalendar={setShowCalendar}
+                  startDateCard={(date) => setStartDate(moment(date).toDate())}
+                  endDateCard={(date) => setEndDate(moment(date).toDate())}
+                />
+              )}
+            </div>
+            <br></br>
             <h3 className={classes.labelTitle}>Label</h3>
             <GithubPicker
               className={classes.colorPicker}

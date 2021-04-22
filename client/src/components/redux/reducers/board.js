@@ -118,6 +118,7 @@ export default function (state = initialState, action) {
           ),
         },
       };
+
     case MOVE_CARD:
       return {
         ...state,

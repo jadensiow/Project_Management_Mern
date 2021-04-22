@@ -6,7 +6,7 @@ const io = require("socket.io")(server);
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 5000;
 
-var cors = require("cors");
+let cors = require("cors");
 
 app.use(cors());
 

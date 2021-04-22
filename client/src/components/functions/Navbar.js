@@ -39,10 +39,6 @@ const Navbar = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
 
-	if (!isAuthenticated) {
-		return "";
-	}
-
 	return (
 		<div className={classes.root}>
 			<AppBar className={classes.navbar} position="static">

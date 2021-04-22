@@ -58,7 +58,7 @@ const Chat = () => {
       setChatUsers(listOfUsers);
     });
   }, [socket]);
-
+  useEffect(() => console.log(msgList), [msgList]);
   const onSubmit = (e) => {
     e.preventDefault();
 
