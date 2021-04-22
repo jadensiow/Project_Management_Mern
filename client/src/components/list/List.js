@@ -1,14 +1,18 @@
-import React, { useRef, useState, useEffect } from "react";
+// Hooks and Redux
+import { useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import PropTypes from "prop-types";
-import { Draggable, Droppable } from "react-beautiful-dnd";
 import { getList } from "../redux/action/board";
-import ListTitle from "./ListTitle";
-import ListMenu from "./ListMenu";
 
+// Libraries
+import { Draggable, Droppable } from "react-beautiful-dnd";
+import Button from "@material-ui/core/Button";
+import PropTypes from "prop-types";
+
+// Components
 import Card from "../card/Card";
 import CreateCardForm from "../card/CreateCardForm";
-import Button from "@material-ui/core/Button";
+import ListTitle from "./ListTitle";
+import ListMenu from "./ListMenu";
 
 const List = ({ listId, index }) => {
   const [addingCard, setAddingCard] = useState(false);

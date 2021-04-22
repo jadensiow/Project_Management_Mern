@@ -168,6 +168,9 @@ body {
 	white-space: nowrap;
 	overflow: hidden;
 }
+.board-title h2 {
+  color: snow;
+}
 
 .board .board-top .board-top-left .board-title-form {
 	background-color: snow;

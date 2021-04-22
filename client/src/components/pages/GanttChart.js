@@ -1,14 +1,22 @@
-import React, { useEffect } from "react";
+// Hooks and redux
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setAlert } from "../redux/action/alert";
 import { useHistory, Redirect } from "react-router-dom";
 import { Button } from "@material-ui/core";
+
+// Animation
 import { motion } from "framer-motion";
+import { chartRouteTransition } from "../../animations/routeAnimations";
+
+// libraries
 import moment from "moment";
 import ReactFC from "react-fusioncharts";
 import FusionCharts from "fusioncharts";
 import Gantt from "fusioncharts/fusioncharts.gantt";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+
+// Components
 import Navbar from "../functions/Navbar";
 import dataSource from "../ganttChart/GanttData";
 import SelectShowChart from "../functions/SelectShowChart";
@@ -208,7 +216,13 @@ const GanttChart = ({ match }) => {
   }
 
   return (
-    <motion.div>
+    <motion.div
+      variants={chartRouteTransition}
+      initial="hidden"
+      animate="show"
+      exit="exit"
+      className="outer-div"
+    >
       <div>
         <div>
           <Navbar />

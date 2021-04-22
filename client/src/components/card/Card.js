@@ -1,10 +1,10 @@
-import React, { Fragment, useRef, useState, useEffect } from "react";
+// Hooks and Redux
+import { Fragment, useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
+// Libraries
 import PropTypes from "prop-types";
 import { Draggable } from "react-beautiful-dnd";
-import { getCard, editCard } from "../redux/action/board";
-import getInitials from "../styles/getInitials";
-
 import CardMUI from "@material-ui/core/Card";
 import EditIcon from "@material-ui/icons/Edit";
 import CloseIcon from "@material-ui/icons/Close";
@@ -16,6 +16,10 @@ import {
   Avatar,
   Tooltip,
 } from "@material-ui/core";
+
+// Components
+import { getCard, editCard } from "../redux/action/board";
+import getInitials from "../styles/getInitials";
 import CardModal from "./CardModal";
 
 const Card = ({ cardId, list, index }) => {
@@ -53,7 +57,7 @@ const Card = ({ cardId, list, index }) => {
   return !card ? (
     ""
   ) : (
-    <Fragment>
+    <>
       <CardModal
         cardId={cardId}
         open={openModal}
@@ -160,7 +164,7 @@ const Card = ({ cardId, list, index }) => {
           </div>
         </form>
       )}
-    </Fragment>
+    </>
   );
 };
 

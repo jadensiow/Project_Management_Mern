@@ -1,8 +1,9 @@
-import React from "react";
+// Hooks and Redux
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "@material-ui/core";
-
 import { logout } from "../redux/action/auth";
+
+// Libraries
+import { Link } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -12,35 +13,36 @@ import IconButton from "@material-ui/core/IconButton";
 import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-	},
-	menuButton: {
-		marginRight: theme.spacing(2),
-	},
-	title: {
-		flexGrow: 1,
-	},
-	navbar: {
-		backgroundColor: "#88E9B8",
-	},
-	hyperlink: {
-		color: "white",
-		"&:hover": {
-			boxShadow: "0 0 0 10px #83E0B1",
-		},
-		borderRadius: "10px",
-	},
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  navbar: {
+    backgroundColor: "#88E9B8",
+  },
+  hyperlink: {
+    color: "white",
+    "&:hover": {
+      boxShadow: "0 0 0 10px #83E0B1",
+    },
+    borderRadius: "10px",
+  },
 }));
 
 const Navbar = () => {
-	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-	const dispatch = useDispatch();
-	const classes = useStyles();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
+  const classes = useStyles();
 
-	if (!isAuthenticated) {
-		return "";
-	}
+  if (!isAuthenticated) {
+    return "";
+  }
+
 
 	return (
 		<div className={classes.root}>
@@ -84,6 +86,7 @@ const Navbar = () => {
 			</AppBar>
 		</div>
 	);
+
 };
 
 export default Navbar;

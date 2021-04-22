@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+// Hooks and redux
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { editCard } from "../redux/action/board";
+
+// Libraries
 import PropTypes from "prop-types";
 import { GithubPicker } from "react-color";
-import { editCard } from "../redux/action/board";
 import { Modal, TextField, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import useStyles from "../styles/modalStyles";
 
+// Components
+import useStyles from "../styles/modalStyles";
 import DeleteCard from "./CardDelete";
 import CardMembers from "./CardMembers";
 

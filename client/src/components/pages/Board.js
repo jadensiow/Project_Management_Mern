@@ -1,12 +1,18 @@
-import React, { useEffect } from "react";
+// Hooks and redux
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { getBoard, moveCard, moveList } from "../redux/action/board";
+
+// Libraries
 import { CircularProgress, Box, Button } from "@material-ui/core";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+
+// Animation
 import { motion } from "framer-motion";
 import { boardRouteTransition } from "../../animations/routeAnimations";
 
+// Components
 import BoardTitle from "../board/BoardTitle.js";
 import List from "../list/List";
 import CreateList from "../board/CreateList";
@@ -15,52 +21,56 @@ import Navbar from "../functions/Navbar";
 import BackgroundButton from "../functions/BackgroundButton";
 
 const Board = ({ match }) => {
-	const board = useSelector((state) => state.board.board);
-	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-	const dispatch = useDispatch();
-	let history = useHistory();
-	useEffect(() => {
-		document.title = "Summary";
-	}, []);
-	useEffect(() => {
-		return () => {
-			console.log("component unmounted");
-		};
-	}, []);
-	useEffect(() => {
-		dispatch(getBoard(match.params.id));
-	}, [dispatch, match.params.id]);
+
+  const board = useSelector((state) => state.board.board);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const dispatch = useDispatch();
+  let history = useHistory();
+  useEffect(() => {
+    document.title = "Summary";
+  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     console.log("component unmounted");
+  //   };
+  // }, []);
+  useEffect(() => {
+    dispatch(getBoard(match.params.id));
+  }, [dispatch, match.params.id]);
+
 
 	if (!isAuthenticated) {
 		return <Redirect to="/" />;
 	}
 
-	const onDragEnd = (result) => {
-		const { source, destination, draggableId, type } = result;
-		if (!destination) {
-			return;
-		}
-		if (type === "card") {
-			dispatch(
-				moveCard(draggableId, {
-					fromId: source.droppableId,
-					toId: destination.droppableId,
-					toIndex: destination.index,
-				})
-			);
-		} else {
-			dispatch(moveList(draggableId, { toIndex: destination.index }));
-		}
-	};
-	const handleChat = () => {
-		history.push(`/board/${match.params.id}/chat`);
-	};
-	const handleChart = () => {
-		history.push(`/board/${board._id}/gantt_chart`);
-	};
-	if (!isAuthenticated) {
-		return <Redirect to="/" />;
-	}
+
+  const onDragEnd = (result) => {
+    const { source, destination, draggableId, type } = result;
+    console.log(result);
+    if (!destination) {
+      return;
+    }
+    if (type === "card") {
+      dispatch(
+        moveCard(draggableId, {
+          fromId: source.droppableId,
+          toId: destination.droppableId,
+          toIndex: destination.index,
+        })
+      );
+    } else {
+      dispatch(moveList(draggableId, { toIndex: destination.index }));
+    }
+  };
+  const handleChat = () => {
+    history.push(`/board/${match.params.id}/chat`);
+  };
+  const handleChart = () => {
+    history.push(`/board/${board._id}/gantt_chart`);
+  };
+  if (!isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
 	return !board ? (
 		<>

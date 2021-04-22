@@ -42,7 +42,7 @@ export const getBoards = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err?.response, status: err?.response },
     });
   }
 };
@@ -65,7 +65,7 @@ export const getBoard = (id) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response },
+      payload: { msg: err?.response },
     });
   }
 };
@@ -88,7 +88,7 @@ export const addBoard = (formData, history) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText },
+      payload: { msg: err?.response },
     });
   }
 };
@@ -110,7 +110,7 @@ export const randImgBoard = (boardId, formData) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err?.response, status: err?.response },
     });
   }
 };
@@ -133,7 +133,7 @@ export const renameBoard = (boardId, formData) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err?.response, status: err?.response },
     });
   }
 };
@@ -150,7 +150,7 @@ export const getList = (id) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err?.response, status: err?.response },
     });
   }
 };
@@ -171,7 +171,7 @@ export const addList = (formData) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err?.response, status: err?.response },
     });
   }
 };
@@ -192,7 +192,7 @@ export const renameList = (listId, formData) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err?.response, status: err?.response },
     });
   }
 };
@@ -210,8 +210,8 @@ export const getCard = (id) => async (dispatch) => {
     dispatch({
       type: BOARD_ERROR,
       payload: {
-        msg: err?.response?.statusText,
-        status: err?.response?.status,
+        msg: err?.response,
+        status: err?.response,
       },
     });
   }
@@ -233,7 +233,7 @@ export const addCard = (formData) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err?.response, status: err?.response },
     });
   }
 };
@@ -254,7 +254,7 @@ export const editCard = (cardId, formData) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err?.response, status: err?.response },
     });
   }
 };
@@ -273,7 +273,7 @@ export const moveCard = (cardId, formData) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err?.response, status: err?.response },
     });
   }
 };
@@ -292,7 +292,7 @@ export const deleteCard = (listId, cardId) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err?.response, status: err?.response },
     });
   }
 };
@@ -311,7 +311,7 @@ export const getActivity = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err?.response, status: err?.response },
     });
   }
 };
@@ -330,7 +330,7 @@ export const addMember = (userId) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err?.response, status: err?.response },
     });
   }
 };
@@ -353,7 +353,7 @@ export const addCardMember = (formData) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err?.response, status: err?.response },
     });
   }
 };
@@ -371,7 +371,7 @@ export const moveList = (listId, formData) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err?.response, status: err?.response },
     });
   }
 };
