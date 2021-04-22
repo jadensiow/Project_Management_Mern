@@ -4,10 +4,10 @@ const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const mongoose = require("mongoose");
-const path = require("path");
 const PORT = process.env.PORT || 5000;
+const path = require("path");
 
-let cors = require("cors");
+var cors = require("cors");
 
 app.use(cors());
 
@@ -41,6 +41,20 @@ app.use("/api/boards", boardsController);
 app.use("/api/cards", cardsController);
 app.use("/api/lists", listsController);
 
+const __dirname = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/client/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.json({ message: "API Connected..." });
+  });
+}
+
 let users = {};
 io.on("connection", (socket) => {
   console.log("socket connected: " + socket.id);
@@ -58,8 +72,7 @@ io.on("connection", (socket) => {
   socket.on("newMessage", (newMessage) => {
     // forward message to connected client
     // and only link it up to the same room name
-    console.log("newmessage", newMessage);
-    // emit back to frontend newMessage
+    console.log(newMessage);
     io.to(newMessage.room).emit("newMessage", {
       name: newMessage.name,
       msg: newMessage.msg,
