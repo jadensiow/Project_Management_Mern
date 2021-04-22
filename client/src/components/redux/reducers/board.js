@@ -13,7 +13,6 @@ import {
   EDIT_CARD,
   MOVE_CARD,
   DELETE_CARD,
-  GET_ACTIVITY,
   ADD_MEMBER,
   ADD_CARD_MEMBER,
   RAND_IMG,
@@ -155,14 +154,7 @@ export default function (state = initialState, action) {
           ),
         },
       };
-    case GET_ACTIVITY:
-      return {
-        ...state,
-        board: {
-          ...state.board,
-          activity: payload,
-        },
-      };
+
     case ADD_MEMBER:
       return {
         ...state,

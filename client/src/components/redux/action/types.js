@@ -25,6 +25,5 @@ export const ADD_CARD = "ADD_CARD";
 export const EDIT_CARD = "EDIT_CARD";
 export const MOVE_CARD = "MOVE_CARD";
 export const DELETE_CARD = "DELETE_CARD";
-export const GET_ACTIVITY = "GET_ACTIVITY";
 export const ADD_MEMBER = "ADD_MEMBER";
 export const ADD_CARD_MEMBER = "ADD_CARD_MEMBER";

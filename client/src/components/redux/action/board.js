@@ -15,7 +15,6 @@ import {
   EDIT_CARD,
   MOVE_CARD,
   DELETE_CARD,
-  GET_ACTIVITY,
   ADD_MEMBER,
   ADD_CARD_MEMBER,
   RAND_IMG,
@@ -128,8 +127,6 @@ export const renameBoard = (boardId, formData) => async (dispatch) => {
       type: RENAME_BOARD,
       payload: res.data,
     });
-
-    dispatch(getActivity());
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
@@ -166,8 +163,6 @@ export const addList = (formData) => async (dispatch) => {
       type: ADD_LIST,
       payload: res.data,
     });
-
-    dispatch(getActivity());
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
@@ -228,8 +223,6 @@ export const addCard = (formData) => async (dispatch) => {
       type: ADD_CARD,
       payload: res.data,
     });
-
-    dispatch(getActivity());
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
@@ -268,8 +261,6 @@ export const moveCard = (cardId, formData) => async (dispatch) => {
       type: MOVE_CARD,
       payload: res.data,
     });
-
-    dispatch(getActivity());
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
@@ -285,27 +276,6 @@ export const deleteCard = (listId, cardId) => async (dispatch) => {
 
     dispatch({
       type: DELETE_CARD,
-      payload: res.data,
-    });
-
-    dispatch(getActivity());
-  } catch (err) {
-    dispatch({
-      type: BOARD_ERROR,
-      payload: { msg: err?.response, status: err?.response },
-    });
-  }
-};
-
-// Get activity
-export const getActivity = () => async (dispatch) => {
-  try {
-    const boardId = axios.defaults.headers.common["boardId"];
-
-    const res = await axios.get(`/api/boards/activity/${boardId}`);
-
-    dispatch({
-      type: GET_ACTIVITY,
       payload: res.data,
     });
   } catch (err) {
@@ -325,8 +295,6 @@ export const addMember = (userId) => async (dispatch) => {
       type: ADD_MEMBER,
       payload: res.data,
     });
-
-    dispatch(getActivity());
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,
@@ -348,8 +316,6 @@ export const addCardMember = (formData) => async (dispatch) => {
       type: ADD_CARD_MEMBER,
       payload: res.data,
     });
-
-    dispatch(getActivity());
   } catch (err) {
     dispatch({
       type: BOARD_ERROR,

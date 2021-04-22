@@ -38,14 +38,6 @@ router.post(
       list.cards.push(card);
       await list.save();
 
-      // Log activity
-      const user = await User.findById(req.user.id);
-      const board = await Board.findById(boardId);
-      board.activity.unshift({
-        text: `${user.name} added '${title}' to '${list.title}'`,
-      });
-      await board.save();
-
       res.json({ cardId: card.id, listId });
     } catch (err) {
       console.error(err.message);
@@ -156,17 +148,6 @@ router.patch("/move/:id", [auth, member], async (req, res) => {
       await to.save();
     }
 
-    // Log activity
-    if (fromId !== toId) {
-      const user = await User.findById(req.user.id);
-      const board = await Board.findById(boardId);
-      const card = await Card.findById(cardId);
-      board.activity.unshift({
-        text: `${user.name} moved '${card.title}' from '${from.title}' to '${to.title}'`,
-      });
-      await board.save();
-    }
-
     res.send({ cardId, from, to });
   } catch (err) {
     console.error(err.message);
@@ -201,11 +182,6 @@ router.put(
       }
       await card.save();
 
-      // Log activity
-      const board = await Board.findById(req.header("boardId"));
-      board.activity.unshift({
-        text: `${user.name} ${add ? "joined" : "left"} '${card.title}'`,
-      });
       await board.save();
 
       res.json(card);
@@ -228,14 +204,6 @@ router.delete("/:listId/:id", [auth, member], async (req, res) => {
     list.cards.splice(list.cards.indexOf(req.params.id), 1);
     await list.save();
     await card.remove();
-
-    // Log activity
-    const user = await User.findById(req.user.id);
-    const board = await Board.findById(req.header("boardId"));
-    board.activity.unshift({
-      text: `${user.name} deleted '${card.title}' from '${list.title}'`,
-    });
-    await board.save();
 
     res.json(req.params.id);
   } catch (err) {

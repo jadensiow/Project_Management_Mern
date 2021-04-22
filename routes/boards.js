@@ -42,10 +42,6 @@ router.post(
       // Add user to board so can be e dit
       board.members.push({ user: user.id, name: user.name });
 
-      // Log activity
-      board.activity.unshift({
-        text: `${user.name} created this board`,
-      });
       await board.save();
 
       res.json(board);
@@ -88,21 +84,6 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
-// Get a board's activity
-router.get("/activity/:boardId", auth, async (req, res) => {
-  try {
-    const board = await Board.findById(req.params.boardId);
-    if (!board) {
-      return res.status(404).json({ msg: "Board not found" });
-    }
-
-    res.json(board.activity);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
 // change board backgorund
 router.patch("/background/:id", auth, async (req, res) => {
   try {
@@ -134,14 +115,6 @@ router.patch(
       const board = await Board.findById(req.params.id);
       if (!board) {
         return res.status(404).json({ msg: "Board not found" });
-      }
-
-      // Log activity
-      if (req.body.title !== board.title) {
-        const user = await User.findById(req.user.id);
-        board.activity.unshift({
-          text: `${user.name} renamed this board (from '${board.title}')`,
-        });
       }
 
       board.title = req.body.title;
@@ -183,10 +156,6 @@ router.put("/addMember/:userId", [auth, member], async (req, res) => {
       avatar: user.avatar,
     });
 
-    // Log activity
-    board.activity.unshift({
-      text: `${user.name} joined this board`,
-    });
     await board.save();
 
     res.json(board.members);

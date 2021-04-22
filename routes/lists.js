@@ -33,11 +33,6 @@ router.post(
       const board = await Board.findById(boardId);
       board.lists.push(list.id);
 
-      // Log activity
-      const user = await User.findById(req.user.id);
-      board.activity.unshift({
-        text: `${user.name} added '${title}' to this board`,
-      });
       await board.save();
 
       res.json(list);
