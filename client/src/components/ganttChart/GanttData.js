@@ -9,15 +9,16 @@ const dataSource = {
 		plottooltext:
 			"$processName{br} $label starting date $start{br}$label ending date $end",
 		ganttPaneDurationUnit: "d",
-		// forceRowHeight: true,
+		forceRowHeight: true,
 		flatScrollBars: "1",
-		showTaskStartDate: true,
-		showTaskEndDate: true,
 		captionAlignment: "center",
 		showBorder: true,
+		taskBarRoundRadius: "10",
 	},
 	tasks: {
 		color: "#5D62B5",
+		showenddate: true,
+		showstartdate: true,
 		task: [],
 	},
 	processes: {

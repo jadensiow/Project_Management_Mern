@@ -43,75 +43,50 @@ const Navbar = () => {
     return "";
   }
 
-  return (
-    <div className={classes.root}>
-      <AppBar className={classes.navbar} position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-            href="/dashboard"
-          >
-            <HomeRoundedIcon fontSize="large" />
-          </IconButton>{" "}
-          <Typography variant="h4" className={classes.title}>
-            <Link href="/" className={classes.hyperlink} underline="none">
-              Project Management
-            </Link>
-          </Typography>
-          {isAuthenticated ? (
-            <Button
-              color="inherit"
-              href="/"
-              onClick={() => dispatch(logout())}
-              size="default"
-              variant="outlined"
-            >
-              <Typography variant="h6">Logout</Typography>
-            </Button>
-          ) : (
-            <Button
-              color="inherit"
-              href="/login"
-              size="default"
-              variant="outlined"
-            >
-              <Typography variant="h6">Login</Typography>
-            </Button>
-          )}
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+
+	return (
+		<div className={classes.root}>
+			<AppBar className={classes.navbar} position="static">
+				<Toolbar>
+					<IconButton
+						edge="start"
+						className={classes.menuButton}
+						color="inherit"
+						aria-label="menu"
+						href="/dashboard"
+					>
+						<HomeRoundedIcon fontSize="large" />
+					</IconButton>
+					<Typography variant="h4" className={classes.title}>
+						<Link href="/" className={classes.hyperlink} underline="none">
+							Project Management
+						</Link>
+					</Typography>
+					{isAuthenticated ? (
+						<Button
+							color="inherit"
+							href="/"
+							onClick={() => dispatch(logout())}
+							size="default"
+							variant="outlined"
+						>
+							<Typography variant="h6">Logout</Typography>
+						</Button>
+					) : (
+						<Button
+							color="inherit"
+							href="/login"
+							size="default"
+							variant="outlined"
+						>
+							<Typography variant="h6">Login</Typography>
+						</Button>
+					)}
+				</Toolbar>
+			</AppBar>
+		</div>
+	);
+
 };
 
 export default Navbar;
-
-// const Navbar = () => {
-
-// 	return (
-// 		<div className={classes.root}>
-// 			<AppBar position="static">
-// 				<Toolbar>
-// 					<IconButton
-// 						edge="start"
-// 						className={classes.menuButton}
-// 						color="inherit"
-// 						aria-label="menu"
-// 						href="/dashboard"
-// 					>
-// 						<HomeRoundedIcon />
-// 					</IconButton>
-// 					<Typography variant="h6" className={classes.title}>
-// 						Project Management
-// 					</Typography>
-// 					<Button color="inherit" href="/login">
-// 						Login
-// 					</Button>
-// 				</Toolbar>
-// 			</AppBar>
-// 		</div>
-// 	);
-// };
