@@ -57,7 +57,7 @@ const Card = ({ cardId, list, index }) => {
   return !card ? (
     ""
   ) : (
-    <Fragment>
+    <>
       <CardModal
         cardId={cardId}
         open={openModal}
@@ -164,7 +164,7 @@ const Card = ({ cardId, list, index }) => {
           </div>
         </form>
       )}
-    </Fragment>
+    </>
   );
 };
 

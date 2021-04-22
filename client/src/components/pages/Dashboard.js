@@ -30,7 +30,6 @@ const Dashboard = () => {
   const boards = useSelector((state) => state.board.boards);
   const loading = useSelector((state) => state.board.dashboardLoading);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getBoards());
   }, [dispatch]);
@@ -58,7 +57,7 @@ const Dashboard = () => {
         <Navbar />
 
         <section className="dashboard">
-          <h1>Welcome {user.name}</h1>
+          <h1>Welcome {user && user.name}</h1>
           <h2>Your Projects</h2>
           {loading && <CircularProgress className="dashboard-loading" />}
           <div className="boards">
