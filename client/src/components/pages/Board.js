@@ -43,6 +43,7 @@ const Board = ({ match }) => {
 
   const onDragEnd = (result) => {
     const { source, destination, draggableId, type } = result;
+    console.log(result);
     if (!destination) {
       return;
     }

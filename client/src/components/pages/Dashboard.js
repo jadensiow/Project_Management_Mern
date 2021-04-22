@@ -16,46 +16,45 @@ import { getBoards } from "../redux/action/board";
 import CreateBoard from "../board/CreateBoard";
 
 const Dashboard = () => {
+	useEffect(() => {
+		document.title = "Projects";
+	}, []);
 
-  useEffect(() => {
-    document.title = "Projects";
-  }, []);
+	// useEffect(() => {
+	//   return () => {
+	//     console.log("component unmounted");
+	//   };
+	// }, []);
 
-  // useEffect(() => {
-  //   return () => {
-  //     console.log("component unmounted");
-  //   };
-  // }, []);
+	const { user, isAuthenticated } = useSelector((state) => state.auth);
+	const boards = useSelector((state) => state.board.boards);
+	const loading = useSelector((state) => state.board.dashboardLoading);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getBoards());
+	}, [dispatch]);
 
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
-  const boards = useSelector((state) => state.board.boards);
-  const loading = useSelector((state) => state.board.dashboardLoading);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getBoards());
-  }, [dispatch]);
+	if (!isAuthenticated) {
+		return <Redirect to="/" />;
+	}
 
-  if (!isAuthenticated) {
-    return <Redirect to="/" />;
-  }
-
-  return !boards ? (
-    <>
-      <Navbar />
-      <Box className="board-loading">
-        <CircularProgress />
-      </Box>
-    </>
-  ) : (
-    <motion.div
-      variants={dashboardRouteTransition}
-      initial="hidden"
-      animate="show"
-      exit="exit"
-      className="outer-div"
-    >
-      <div className="dashboard-and-navbar">
-        <Navbar />
+	return !boards ? (
+		<>
+			<Navbar />
+			<Box className="board-loading">
+				<CircularProgress />
+			</Box>
+		</>
+	) : (
+		<motion.div
+			variants={dashboardRouteTransition}
+			initial="hidden"
+			animate="show"
+			exit="exit"
+			className="outer-div"
+		>
+			<div className="dashboard-and-navbar">
+				<Navbar />
 
 				<section className="dashboard">
 					<h1>Welcome {user && user.name}</h1>

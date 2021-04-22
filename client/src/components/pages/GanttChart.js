@@ -204,6 +204,9 @@ const GanttChart = ({ match }) => {
     }
   };
 
+  const handleBack = () => {
+    history.push(`/board/${match.params.id}`);
+  };
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }
@@ -214,7 +217,10 @@ const GanttChart = ({ match }) => {
         <div>
           <Navbar />
         </div>
-
+        <br></br>
+        <Button id="backpage" variant="contained" onClick={handleBack}>
+          Back To Board
+        </Button>
         <div
           style={{
             display: "flex",
