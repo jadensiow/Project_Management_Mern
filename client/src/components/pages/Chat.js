@@ -1,16 +1,21 @@
-import React, { useState, useEffect, useRef } from "react";
+// Hooks and redux
+import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Container } from "react-bootstrap";
 import { Redirect, useHistory } from "react-router-dom";
-import Navbar from "../functions/Navbar";
 
-import { Button } from "@material-ui/core";
+// Animation
 import { motion } from "framer-motion";
 import { chatRouteTransition } from "../../animations/routeAnimations";
 
+// Libraries
 import io from "socket.io-client";
-import "../styles/chat.css";
+import { Button } from "@material-ui/core";
+
+// Components
+import Navbar from "../functions/Navbar";
 import StyledBadge from "../styles/onlinelight";
+import "../styles/chat.css";
 
 const socket = io();
 

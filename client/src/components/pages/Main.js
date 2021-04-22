@@ -1,24 +1,24 @@
-// Material UI
-import { Button } from "@material-ui/core";
-
-// React
+// Hooks and redux
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+
+// Components
 import Navbar from "../functions/Navbar";
+
+// Material UI
+import { Button } from "@material-ui/core";
+
 const Main = () => {
-	// data retrieve from the overall state which is the store and data are updated over at reducer // which is like maping of state to props ==> Refer to reducers/index
-	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-	// Tab title
-	useEffect(() => {
-		document.title = "Project Management";
-	}, []);
+  useEffect(() => {
+    document.title = "Project Management";
+  }, []);
 
-	// if contain token will go straight to dashboard as it is a record of like login before
-	if (isAuthenticated) {
-		return <Redirect to="/dashboard" />;
-	}
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <section className="main">
@@ -33,7 +33,7 @@ const Main = () => {
           </Button>
         </div>
       </nav>
-    			<Navbar />
+      <Navbar />
       <div className="main-inner">
         <h1>Project Management</h1>
         <p>Manage your project better!</p>
@@ -45,7 +45,6 @@ const Main = () => {
       </div>
     </section>
   );
-
 };
 
 export default Main;

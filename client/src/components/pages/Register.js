@@ -1,13 +1,13 @@
-// https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-up
-
-import React, { useState, useEffect } from "react";
+// Hooks and redux
+import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-
-// Redux
 import { setAlert } from "../redux/action/alert";
 import { register } from "../redux/action/auth";
 import { useSelector, useDispatch } from "react-redux";
+
+// Animation
 import { motion } from "framer-motion";
+import { loginRouteTransition } from "../../animations/routeAnimations";
 
 // Material UI
 import Typography from "@material-ui/core/Typography";
@@ -18,16 +18,15 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { loginRouteTransition } from "../../animations/routeAnimations";
+
+// Components
 import "../styles/temp.css";
 
 const Register = () => {
-  // Tab title
   useEffect(() => {
     document.title = "Registration";
   }, []);
 
-  // start form as empty
   const [registration, setRegistration] = useState({
     FullName: "",
     email: "",
@@ -35,10 +34,8 @@ const Register = () => {
     cfmPassword: "",
   });
 
-  // same thing to get selector data from the overall reducer
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
-
   const { name, email, password, cfmPassword } = registration;
 
   const onChange = (e) =>
@@ -47,7 +44,6 @@ const Register = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (password !== cfmPassword) {
-      // get setAlert from actions which is store in the redux store
       dispatch(setAlert("Passwords do not match", "error"));
     } else {
       dispatch(register({ name, email, password }));

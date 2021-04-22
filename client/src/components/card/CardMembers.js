@@ -1,13 +1,17 @@
-import React from "react";
+// Hooks and Redux
 import { useSelector, useDispatch } from "react-redux";
-import PropTypes from "prop-types";
 import { addCardMember } from "../redux/action/board";
+
+// Libraries
+import PropTypes from "prop-types";
 import {
   Checkbox,
   FormGroup,
   FormControlLabel,
   FormControl,
 } from "@material-ui/core";
+
+// Components
 import useStyles from "../styles/modalStyles";
 
 const CardMembers = ({ card }) => {

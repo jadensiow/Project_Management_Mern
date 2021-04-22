@@ -1,11 +1,14 @@
-// https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
-
-import React, { useState, useEffect } from "react";
+// Hooks and redux
+import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../redux/action/auth";
-import { motion } from "framer-motion";
 
+// Aniamtion
+import { motion } from "framer-motion";
+import { loginRouteTransition } from "../../animations/routeAnimations";
+
+// Material UI
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -13,32 +16,27 @@ import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { loginRouteTransition } from "../../animations/routeAnimations";
 
+// Components
 import "../styles/temp.css";
 
 const Login = () => {
   useEffect(() => {
     document.title = "Login";
   }, []);
-
+  const { email, password } = formData;
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  const { email, password } = formData;
-
-  // to enable both to be typed
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    // run login function in actions/auth
     dispatch(login(email, password));
   };
 

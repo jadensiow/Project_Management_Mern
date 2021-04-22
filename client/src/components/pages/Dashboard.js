@@ -1,25 +1,31 @@
-import React, { useEffect } from "react";
+// Hooks and redux
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
-import Navbar from "../functions/Navbar";
+
+// Animation
+import { dashboardRouteTransition } from "../../animations/routeAnimations";
 import { motion } from "framer-motion";
 
+// Libraries
 import { CircularProgress, Box } from "@material-ui/core";
+
+// Components
+import Navbar from "../functions/Navbar";
 import { getBoards } from "../redux/action/board";
 import CreateBoard from "../board/CreateBoard";
-import { dashboardRouteTransition } from "../../animations/routeAnimations";
 
 const Dashboard = () => {
   useEffect(() => {
     document.title = "Projects";
   }, []);
-  useEffect(() => {
-    return () => {
-      console.log("component unmounted");
-    };
-  }, []);
 
-  // to retrieve all the data from the redux store which is at the reducers
+  // useEffect(() => {
+  //   return () => {
+  //     console.log("component unmounted");
+  //   };
+  // }, []);
+
   const { user, isAuthenticated } = useSelector((state) => state.auth);
   const boards = useSelector((state) => state.board.boards);
   const loading = useSelector((state) => state.board.dashboardLoading);
@@ -29,12 +35,10 @@ const Dashboard = () => {
     dispatch(getBoards());
   }, [dispatch]);
 
-  // update boards from aciton/board to the data from monngodb. as may have multiple board
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }
 
-  // after that map according to the board sleeected
   return !boards ? (
     <>
       <Navbar />
@@ -54,7 +58,7 @@ const Dashboard = () => {
         <Navbar />
 
         <section className="dashboard">
-          <h1>Welcome {user && user.name}</h1>
+          <h1>Welcome {user.name}</h1>
           <h2>Your Projects</h2>
           {loading && <CircularProgress className="dashboard-loading" />}
           <div className="boards">

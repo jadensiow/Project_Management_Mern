@@ -1,11 +1,13 @@
-import React from "react";
+// Hooks and Redux
 import { useState } from "react";
 
+// Libraries
 import CloseIcon from "@material-ui/icons/Close";
 import { DateRangePicker } from "react-date-range";
 import { Button } from "@material-ui/core";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
+
 const CalendarPopUp = (props) => {
   const [selectionRange, setSelectionRange] = useState({
     startDate: new Date(),

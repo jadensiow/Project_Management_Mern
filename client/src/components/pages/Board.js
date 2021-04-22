@@ -1,12 +1,18 @@
-import React, { useEffect } from "react";
+// Hooks and redux
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { getBoard, moveCard, moveList } from "../redux/action/board";
+
+// Libraries
 import { CircularProgress, Box, Button } from "@material-ui/core";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+
+// Animation
 import { motion } from "framer-motion";
 import { boardRouteTransition } from "../../animations/routeAnimations";
 
+// Components
 import BoardTitle from "../board/BoardTitle.js";
 import List from "../list/List";
 import CreateList from "../board/CreateList";
@@ -22,11 +28,11 @@ const Board = ({ match }) => {
   useEffect(() => {
     document.title = "Summary";
   }, []);
-  useEffect(() => {
-    return () => {
-      console.log("component unmounted");
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     console.log("component unmounted");
+  //   };
+  // }, []);
   useEffect(() => {
     dispatch(getBoard(match.params.id));
   }, [dispatch, match.params.id]);

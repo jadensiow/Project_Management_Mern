@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { SET_ALERT, REMOVE_ALERT } from "./types";
 
-// run according to whichever type it is. The type itself will trigger back to actions/alert where according to which will have the actions
 export const setAlert = (msg, alertType, timeout = 5000) => (dispatch) => {
   const id = uuidv4();
   dispatch({
