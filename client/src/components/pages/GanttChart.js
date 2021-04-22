@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setAlert } from "../redux/action/alert";
 import { useHistory, Redirect } from "react-router-dom";
-import { Button } from "@material-ui/core";
 
 // libraries
 import moment from "moment";
@@ -204,9 +203,6 @@ const GanttChart = ({ match }) => {
     }
   };
 
-  const handleBack = () => {
-    history.push(`/board/${match.params.id}`);
-  };
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }
@@ -217,10 +213,7 @@ const GanttChart = ({ match }) => {
         <div>
           <Navbar />
         </div>
-        <br></br>
-        <Button id="backpage" variant="contained" onClick={handleBack}>
-          Back To Board
-        </Button>
+
         <div
           style={{
             display: "flex",
