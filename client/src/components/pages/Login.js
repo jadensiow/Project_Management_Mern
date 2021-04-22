@@ -8,7 +8,7 @@ import { login } from "../redux/action/auth";
 import { motion } from "framer-motion";
 import { loginRouteTransition } from "../../animations/routeAnimations";
 
-// Material UI
+// Material
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -17,26 +17,27 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
-// Components
 import "../styles/temp.css";
 
 const Login = () => {
   useEffect(() => {
     document.title = "Login";
   }, []);
-  const { email, password } = formData;
+
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const { email, password } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
     dispatch(login(email, password));
   };
 
