@@ -9,6 +9,7 @@ import { GithubPicker } from "react-color";
 import { Modal, TextField, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import moment from "moment";
+
 // Components
 import useStyles from "../styles/modalStyles";
 import DeleteCard from "./CardDelete";
@@ -26,9 +27,9 @@ const CardModal = ({ cardId, open, setOpen, card, list }) => {
   const checkCard = useSelector((state) =>
     state.board.board.cardObjects.find((object) => object._id === cardId)
   );
-
+  console.log(moment(startDate).format("L"));
+  console.log(moment(checkCard.date.startDate, "ddMM/yyyy"));
   const dispatch = useDispatch();
-
   useEffect(() => {
     setTitle(card.title);
     setDescription(card.description);
@@ -40,17 +41,7 @@ const CardModal = ({ cardId, open, setOpen, card, list }) => {
       editCard(cardId, { title, description, date: { startDate, endDate } })
     );
   };
-  const dateFormat = (e) => {
-    let newDate = e.split("-");
-    let updatedDate = `${newDate[2].slice(0, 2)}-${newDate[1]}-${newDate[0]}`;
-    return updatedDate;
-  };
-  const dateFormatter = (date) => {
-    let d = date.getDate();
-    let m = date.getMonth() + 1;
-    let y = date.getFullYear();
-    return "" + (d <= 9 ? "0" + d : d) + "-" + (m <= 9 ? "0" + m : m) + "-" + y;
-  };
+
   return (
     <Modal open={open} onClose={() => setOpen(false)}>
       <div className={`${classes.paper} ${classes.cardModal}`}>
@@ -91,7 +82,11 @@ const CardModal = ({ cardId, open, setOpen, card, list }) => {
               title === card.title &&
               (description === card.description ||
                 (description === "" && !card.description)) &&
-              startDate === ""
+              (startDate === "" ||
+                (moment(checkCard.date.startDate).format("L") ===
+                  moment(startDate).format("L") &&
+                  moment(checkCard.date.endDate).format("L") ===
+                    moment(endDate).format("L")))
             }
             className={classes.button}
           >
@@ -104,14 +99,14 @@ const CardModal = ({ cardId, open, setOpen, card, list }) => {
             <p>
               Start:{" "}
               {startDate === ""
-                ? dateFormat(checkCard.date.startDate)
-                : dateFormatter(startDate)}
+                ? moment(checkCard.date.startDate).format("L")
+                : moment(startDate).format("L")}
             </p>
             <p>
               End:{" "}
               {endDate === ""
-                ? dateFormat(checkCard.date.endDate)
-                : dateFormatter(endDate)}
+                ? moment(checkCard.date.endDate).format("L")
+                : moment(endDate).format("L")}
             </p>
             <br></br>
             <div className="card-actions">

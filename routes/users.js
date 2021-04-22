@@ -7,8 +7,8 @@ const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 require("dotenv").config();
 const User = require("../models/User");
-var cors = require("cors");
-var app = express();
+let cors = require("cors");
+let app = express();
 
 app.use(cors());
 // To set up check before posting

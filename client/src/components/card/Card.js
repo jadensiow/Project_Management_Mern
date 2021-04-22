@@ -16,6 +16,7 @@ import {
   Avatar,
   Tooltip,
 } from "@material-ui/core";
+import moment from "moment";
 
 // Components
 import { getCard, editCard } from "../redux/action/board";
@@ -33,11 +34,6 @@ const Card = ({ cardId, list, index }) => {
     state.board.board.cardObjects.find((object) => object._id === cardId)
   );
 
-  const dateFormat = (e) => {
-    let newDate = e.split("-");
-    let updatedDate = `${newDate[2].slice(0, 2)}-${newDate[1]}-${newDate[0]}`;
-    return updatedDate;
-  };
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -104,8 +100,8 @@ const Card = ({ cardId, list, index }) => {
                   />
                 )}
                 <h4>{card.title}</h4>
-                <p>Start: {dateFormat(card.date.startDate)}</p>
-                <p>End: {dateFormat(card.date.endDate)}</p>
+                <p>Start: {moment(card.date.startDate).format("L")}</p>
+                <p>End: {moment(card.date.endDate).format("L")}</p>
 
                 <div className="card-bottom">
                   <div className="card-bottom-left">

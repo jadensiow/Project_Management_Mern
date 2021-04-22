@@ -9,8 +9,8 @@ const User = require("../models/User");
 const Board = require("../models/Board");
 const List = require("../models/List");
 const Card = require("../models/Card");
-var cors = require("cors");
-var app = express();
+let cors = require("cors");
+let app = express();
 
 app.use(cors());
 // Add a card
@@ -89,7 +89,7 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
-// Edit a card's title, description, and/or label
+// Edit a card's title, description or dates
 router.patch("/edit/:id", [auth, member], async (req, res) => {
   try {
     const { title, description, label } = req.body;
@@ -110,9 +110,11 @@ router.patch("/edit/:id", [auth, member], async (req, res) => {
       card.description = description;
       card.date.startDate = startDate;
       card.date.endDate = endDate;
-      console.log("run");
     }
-
+    if (startDate) {
+      card.date.startDate = startDate;
+      card.date.endDate = endDate;
+    }
     if (label || label === "none") {
       card.label = label;
     }
