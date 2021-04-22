@@ -20,6 +20,7 @@ const Main = () => {
     return <Redirect to="/dashboard" />;
   }
 
+
   return (
     <section className="main">
       <nav className="top">
