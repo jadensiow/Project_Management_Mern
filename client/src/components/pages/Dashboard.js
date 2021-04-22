@@ -10,69 +10,69 @@ import CreateBoard from "../board/CreateBoard";
 import { dashboardRouteTransition } from "../../animations/routeAnimations";
 
 const Dashboard = () => {
-  useEffect(() => {
-    document.title = "Summary";
-  }, []);
-  useEffect(() => {
-    return () => {
-      console.log("component unmounted");
-    };
-  }, []);
+	useEffect(() => {
+		document.title = "Projects";
+	}, []);
+	useEffect(() => {
+		return () => {
+			console.log("component unmounted");
+		};
+	}, []);
 
-  // to retrieve all the data from the redux store which is at the reducers
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
-  const boards = useSelector((state) => state.board.boards);
-  const loading = useSelector((state) => state.board.dashboardLoading);
-  const dispatch = useDispatch();
+	// to retrieve all the data from the redux store which is at the reducers
+	const { user, isAuthenticated } = useSelector((state) => state.auth);
+	const boards = useSelector((state) => state.board.boards);
+	const loading = useSelector((state) => state.board.dashboardLoading);
+	const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getBoards());
-  }, [dispatch]);
+	useEffect(() => {
+		dispatch(getBoards());
+	}, [dispatch]);
 
-  // update boards from aciton/board to the data from monngodb. as may have multiple board
-  if (!isAuthenticated) {
-    return <Redirect to="/" />;
-  }
+	// update boards from action/board to the data from monngodb. as may have multiple board
+	if (!isAuthenticated) {
+		return <Redirect to="/" />;
+	}
 
-  // after that map according to the board sleeected
-  return !boards ? (
-    <>
-      <Navbar />
-      <Box className="board-loading">
-        <CircularProgress />
-      </Box>
-    </>
-  ) : (
-    <motion.div
-      variants={dashboardRouteTransition}
-      initial="hidden"
-      animate="show"
-      exit="exit"
-      className="outer-div"
-    >
-      <div className="dashboard-and-navbar">
-        <Navbar />
+	// after that map according to the board sleeected
+	return !boards ? (
+		<>
+			<Navbar />
+			<Box className="board-loading">
+				<CircularProgress />
+			</Box>
+		</>
+	) : (
+		<motion.div
+			variants={dashboardRouteTransition}
+			initial="hidden"
+			animate="show"
+			exit="exit"
+			className="outer-div"
+		>
+			<div>
+				<Navbar />
 
-        <section className="dashboard">
-          <h1>Welcome {user && user.name}</h1>
-          <h2>Your Projects</h2>
-          {loading && <CircularProgress className="dashboard-loading" />}
-          <div className="boards">
-            {boards.map((board) => (
-              <Link
-                key={board._id}
-                to={`/board/${board._id}`}
-                className="board-card"
-              >
-                {board.title}
-              </Link>
-            ))}
-            <CreateBoard />
-          </div>
-        </section>
-      </div>
-    </motion.div>
-  );
+				<section className="dashboard">
+					<h1>Welcome {user && user.name}</h1>
+					<h2>Your Projects</h2>
+					{loading && <CircularProgress className="dashboard-loading" />}
+					<div className="boards">
+						{boards.map((board) => (
+							<Link
+								key={board._id}
+								to={`/board/${board._id}`}
+								className="board-card"
+							>
+								{board.title}
+							</Link>
+						))}
+						<CreateBoard />
+					</div>
+				</section>
+			</div>
+		</motion.div>
+	);
 };
 
 export default Dashboard;

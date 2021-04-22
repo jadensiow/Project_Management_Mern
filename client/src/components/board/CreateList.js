@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addList } from "../redux/action/board";
 import { TextField, Button } from "@material-ui/core";

@@ -5,7 +5,6 @@ import { Button } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import Navbar from "../functions/Navbar";
 const Main = () => {
 	// data retrieve from the overall state which is the store and data are updated over at reducer // which is like maping of state to props ==> Refer to reducers/index
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -20,32 +19,31 @@ const Main = () => {
 		return <Redirect to="/dashboard" />;
 	}
 
-  return (
-    <section className="main">
-      <nav className="top">
-        <h2>Project Management</h2>
-        <div>
-          <Button color="inherit" href="/login">
-            Login
-          </Button>
-          <Button variant="contained" href="/register">
-            Register
-          </Button>
-        </div>
-      </nav>
-    			<Navbar />
-      <div className="main-inner">
-        <h1>Project Management</h1>
-        <p>Manage your project better!</p>
-        <div className="buttons">
-          <Button variant="outlined" color="inherit" href="/register">
-            Register
-          </Button>
-        </div>
-      </div>
-    </section>
-  );
+	return (
+		<section className="main">
+			<nav className="top">
+				<h2>Project Management</h2>
+				<div>
+					<Button color="inherit" href="/login">
+						Login
+					</Button>
+					<Button variant="contained" href="/register">
+						Register
+					</Button>
+				</div>
+			</nav>
 
+			<div className="main-inner">
+				<h1>Project Management</h1>
+				<p>Manage your project better!</p>
+				<div className="buttons">
+					<Button variant="outlined" color="inherit" href="/register">
+						Register
+					</Button>
+				</div>
+			</div>
+		</section>
+	);
 };
 
 export default Main;

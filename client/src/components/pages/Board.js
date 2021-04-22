@@ -20,6 +20,9 @@ const Board = ({ match }) => {
 	const dispatch = useDispatch();
 	let history = useHistory();
 	useEffect(() => {
+		document.title = "Summary";
+	}, []);
+	useEffect(() => {
 		return () => {
 			console.log("component unmounted");
 		};

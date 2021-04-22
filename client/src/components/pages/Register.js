@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 import { setAlert } from "../redux/action/alert";
 import { register } from "../redux/action/auth";
 import { useSelector, useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 // Material UI
 import Typography from "@material-ui/core/Typography";
@@ -17,6 +18,8 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { loginRouteTransition } from "../../animations/routeAnimations";
+import "../styles/temp.css";
 
 const Register = () => {
   // Tab title
@@ -56,81 +59,89 @@ const Register = () => {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div>
-        <Typography component="h1" variant="h4">
-          Project Management
-        </Typography>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <form onSubmit={(e) => onSubmit(e)}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                autoComplete="name"
-                name="name"
-                variant="outlined"
-                required
-                fullWidth
-                label="Your Name"
-                autoFocus
-                value={name}
-                onChange={(e) => onChange(e)}
-              />
+    <motion.div
+      variants={loginRouteTransition}
+      initial="hidden"
+      animate="show"
+      exit="exit"
+      className="outer-div"
+    >
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div>
+          <Typography component="h1" variant="h4">
+            Project Management
+          </Typography>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <form onSubmit={(e) => onSubmit(e)}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  autoComplete="name"
+                  name="name"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="Your Name"
+                  autoFocus
+                  value={name}
+                  onChange={(e) => onChange(e)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => onChange(e)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => onChange(e)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="cfmPassword"
+                  label="Confirm Password"
+                  type="password"
+                  value={cfmPassword}
+                  onChange={(e) => onChange(e)}
+                />
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => onChange(e)}
-              />
+            <Button type="submit" fullWidth variant="contained" color="primary">
+              Register
+            </Button>
+            <Grid container justify="flex-end">
+              <Grid item>
+                <Link href="/login" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                value={password}
-                onChange={(e) => onChange(e)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="cfmPassword"
-                label="Confirm Password"
-                type="password"
-                value={cfmPassword}
-                onChange={(e) => onChange(e)}
-              />
-            </Grid>
-          </Grid>
-          <Button type="submit" fullWidth variant="contained" color="primary">
-            Register
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="/login" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={5}></Box>
-    </Container>
+          </form>
+        </div>
+        <Box mt={5}></Box>
+      </Container>
+    </motion.div>
   );
 };
 

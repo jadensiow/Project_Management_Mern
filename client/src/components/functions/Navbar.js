@@ -54,7 +54,7 @@ const Navbar = () => {
 						href="/dashboard"
 					>
 						<HomeRoundedIcon fontSize="large" />
-					</IconButton>{" "}
+					</IconButton>
 					<Typography variant="h4" className={classes.title}>
 						<Link href="/" className={classes.hyperlink} underline="none">
 							Project Management
@@ -87,30 +87,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-// const Navbar = () => {
-
-// 	return (
-// 		<div className={classes.root}>
-// 			<AppBar position="static">
-// 				<Toolbar>
-// 					<IconButton
-// 						edge="start"
-// 						className={classes.menuButton}
-// 						color="inherit"
-// 						aria-label="menu"
-// 						href="/dashboard"
-// 					>
-// 						<HomeRoundedIcon />
-// 					</IconButton>
-// 					<Typography variant="h6" className={classes.title}>
-// 						Project Management
-// 					</Typography>
-// 					<Button color="inherit" href="/login">
-// 						Login
-// 					</Button>
-// 				</Toolbar>
-// 			</AppBar>
-// 		</div>
-// 	);
-// };

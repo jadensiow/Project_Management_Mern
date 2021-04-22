@@ -119,7 +119,6 @@ export default function (state = initialState, action) {
         },
       };
     case MOVE_CARD:
-      console.log(state);
       return {
         ...state,
         board: {
