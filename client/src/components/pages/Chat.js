@@ -58,7 +58,7 @@ const Chat = () => {
       setChatUsers(listOfUsers);
     });
   }, [socket]);
-  useEffect(() => console.log(msgList), [msgList]);
+  //useEffect(() => console.log(msgList), [msgList]);
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -94,9 +94,7 @@ const Chat = () => {
     });
     return isPM;
   };
-  const handleBack = () => {
-    history.push(`/board/${pageID._id}`);
-  };
+
   if (!isAuthenticated) {
     return <Redirect to="/" />;
   }
@@ -110,9 +108,6 @@ const Chat = () => {
     >
       {" "}
       <Navbar />
-      <Button id="backpage" variant="contained" onClick={handleBack}>
-        Back To Board
-      </Button>
       <Container className="chat clearfix">
         <div className="chat-wrapper">
           <div id="user-list">
@@ -134,9 +129,7 @@ const Chat = () => {
               })}
             </ul>
 
-            <h4 className="name">
-              <strong>Online Users</strong>
-            </h4>
+            <h4 id="name">Online Users</h4>
             <ul style={{ listStyleType: "none" }} className="clearfix">
               {chatUsers.map((user) => {
                 return (

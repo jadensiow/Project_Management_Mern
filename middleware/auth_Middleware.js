@@ -7,9 +7,7 @@ let app = express();
 app.use(cors());
 
 module.exports = function (req, res, next) {
-  // Get token from header
   // https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
-  // standard way of testing for authentication
   const token = req.header("Authorization");
   // Check if no token
   if (!token) {

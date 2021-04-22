@@ -27,8 +27,7 @@ const CardModal = ({ cardId, open, setOpen, card, list }) => {
   const checkCard = useSelector((state) =>
     state.board.board.cardObjects.find((object) => object._id === cardId)
   );
-  console.log(moment(startDate).format("L"));
-  console.log(moment(checkCard.date.startDate, "ddMM/yyyy"));
+
   const dispatch = useDispatch();
   useEffect(() => {
     setTitle(card.title);

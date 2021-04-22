@@ -17,6 +17,12 @@
 #user-list h4 {
   text-align: center;
 }
+#user-list h4 b {
+  color: rgb(235, 117, 117);
+}
+#name {
+  color: #84b7e9;
+}
 
 .chat-messages-container {
   width: 70%;

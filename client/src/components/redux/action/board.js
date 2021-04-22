@@ -240,7 +240,6 @@ export const addCard = (formData) => async (dispatch) => {
 
 // Edit card
 export const editCard = (cardId, formData) => async (dispatch) => {
-  console.log(formData);
   try {
     const res = await axios.patch(
       `/api/cards/edit/${cardId}`,
@@ -362,7 +361,6 @@ export const addCardMember = (formData) => async (dispatch) => {
 export const moveList = (listId, formData) => async (dispatch) => {
   try {
     const body = JSON.stringify(formData);
-    console.log(formData);
     const res = await axios.patch(`/api/lists/move/${listId}`, body, config);
 
     dispatch({

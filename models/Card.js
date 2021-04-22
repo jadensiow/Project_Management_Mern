@@ -2,9 +2,7 @@ const { Schema, model } = require("mongoose");
 
 let express = require("express");
 let cors = require("cors");
-let app = express();
 
-app.use(cors());
 const CardSchema = new Schema({
   title: {
     type: String,
