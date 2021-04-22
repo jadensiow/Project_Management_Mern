@@ -1,11 +1,15 @@
-import React, { useRef, useState, useEffect } from "react";
+// Hooks and redux
+import { useRef, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import PropTypes from "prop-types";
 import { addCard } from "../redux/action/board";
-import { Card, CardContent, TextField, Button } from "@material-ui/core";
 import { setAlert } from "../redux/action/alert";
 
+// Libraries
+import PropTypes from "prop-types";
+import { Card, CardContent, TextField, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
+
+// Components
 import CalendarPopUp from "../functions/CalendarPopUp";
 
 const CreateCardForm = ({ listId, setAdding }) => {

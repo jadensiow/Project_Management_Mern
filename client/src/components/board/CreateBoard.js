@@ -1,12 +1,19 @@
+// Hooks and redux
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { addBoard } from "../redux/action/board";
+
+// Libraries
 import { Modal, TextField, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import useStyles from "../styles/modalStyles";
+
+// Animation
 import { AnimatePresence, motion } from "framer-motion";
 import { modalAnimation } from "../../animations/modalAnimations";
+
+// Components
+import useStyles from "../styles/modalStyles";
 
 const CreateBoard = ({ history }) => {
   const classes = useStyles();

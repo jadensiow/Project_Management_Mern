@@ -1,13 +1,18 @@
+// Hooks and redux
 import React, { useState } from "react";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { addMember } from "../redux/action/board";
-import getInitials from "../styles/getInitials";
+
+// Libraries
 import { TextField, Button } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import Tooltip from "@material-ui/core/Tooltip";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import CloseIcon from "@material-ui/icons/Close";
+import axios from "axios";
+
+// Components
+import getInitials from "../styles/getInitials";
 
 const Members = () => {
   const [inviting, setInviting] = useState(false);

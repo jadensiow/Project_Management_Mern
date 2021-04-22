@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
+// Hooks and redux
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import PropTypes from "prop-types";
 import { renameBoard } from "../redux/action/board";
+
+// libraries
+import PropTypes from "prop-types";
 import { TextField } from "@material-ui/core";
 
 const BoardTitle = ({ board }) => {

@@ -1,5 +1,7 @@
-import React from "react";
+// Hooks and redux
 import { useSelector } from "react-redux";
+
+// Libraries
 import AlertMUI from "@material-ui/lab/Alert";
 
 const Alert = () => {

@@ -1,8 +1,9 @@
-import React from "react";
+// Hooks and Redux
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "@material-ui/core";
-
 import { logout } from "../redux/action/auth";
+
+// Libraries
+import { Link } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";

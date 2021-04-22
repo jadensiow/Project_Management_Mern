@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+// Hooks and Redux
+import { useState } from "react";
+
+// Libraries
 import PropTypes from "prop-types";
 import { Button, Menu, MenuItem } from "@material-ui/core";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";

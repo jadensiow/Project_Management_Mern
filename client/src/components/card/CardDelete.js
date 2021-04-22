@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+// Hooks and redux
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteCard } from "../redux/action/board";
+
+// Libraries
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";

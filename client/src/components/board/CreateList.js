@@ -1,6 +1,9 @@
+// Hooks and redux
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addList } from "../redux/action/board";
+
+// Libaries
 import { TextField, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 
