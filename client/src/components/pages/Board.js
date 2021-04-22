@@ -21,56 +21,53 @@ import Navbar from "../functions/Navbar";
 import BackgroundButton from "../functions/BackgroundButton";
 
 const Board = ({ match }) => {
-
-  const board = useSelector((state) => state.board.board);
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const dispatch = useDispatch();
-  let history = useHistory();
-  useEffect(() => {
-    document.title = "Summary";
-  }, []);
-  // useEffect(() => {
-  //   return () => {
-  //     console.log("component unmounted");
-  //   };
-  // }, []);
-  useEffect(() => {
-    dispatch(getBoard(match.params.id));
-  }, [dispatch, match.params.id]);
-
+	const board = useSelector((state) => state.board.board);
+	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+	const dispatch = useDispatch();
+	let history = useHistory();
+	useEffect(() => {
+		document.title = "Summary";
+	}, []);
+	// useEffect(() => {
+	//   return () => {
+	//     console.log("component unmounted");
+	//   };
+	// }, []);
+	useEffect(() => {
+		dispatch(getBoard(match.params.id));
+	}, [dispatch, match.params.id]);
 
 	if (!isAuthenticated) {
 		return <Redirect to="/" />;
 	}
 
-
-  const onDragEnd = (result) => {
-    const { source, destination, draggableId, type } = result;
-    console.log(result);
-    if (!destination) {
-      return;
-    }
-    if (type === "card") {
-      dispatch(
-        moveCard(draggableId, {
-          fromId: source.droppableId,
-          toId: destination.droppableId,
-          toIndex: destination.index,
-        })
-      );
-    } else {
-      dispatch(moveList(draggableId, { toIndex: destination.index }));
-    }
-  };
-  const handleChat = () => {
-    history.push(`/board/${match.params.id}/chat`);
-  };
-  const handleChart = () => {
-    history.push(`/board/${board._id}/gantt_chart`);
-  };
-  if (!isAuthenticated) {
-    return <Redirect to="/" />;
-  }
+	const onDragEnd = (result) => {
+		const { source, destination, draggableId, type } = result;
+		console.log(result);
+		if (!destination) {
+			return;
+		}
+		if (type === "card") {
+			dispatch(
+				moveCard(draggableId, {
+					fromId: source.droppableId,
+					toId: destination.droppableId,
+					toIndex: destination.index,
+				})
+			);
+		} else {
+			dispatch(moveList(draggableId, { toIndex: destination.index }));
+		}
+	};
+	const handleChat = () => {
+		history.push(`/board/${match.params.id}/chat`);
+	};
+	const handleChart = () => {
+		history.push(`/board/${board._id}/gantt_chart`);
+	};
+	if (!isAuthenticated) {
+		return <Redirect to="/" />;
+	}
 
 	return !board ? (
 		<>
