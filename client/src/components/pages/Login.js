@@ -20,84 +20,87 @@ import Container from "@material-ui/core/Container";
 import "../styles/temp.css";
 
 const Login = () => {
-  useEffect(() => {
-    document.title = "Login";
-  }, []);
+	useEffect(() => {
+		document.title = "Login";
+	}, []);
 
-  const dispatch = useDispatch();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const { email, password } = formData;
+	const dispatch = useDispatch();
+	const [formData, setFormData] = useState({
+		email: "",
+		password: "",
+	});
+	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+	const { email, password } = formData;
 
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+	const onChange = (e) =>
+		setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+	const onSubmit = async (e) => {
+		e.preventDefault();
 
-    dispatch(login(email, password));
-  };
+		dispatch(login(email, password));
+	};
 
-  if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
-  }
+	if (isAuthenticated) {
+		return <Redirect to="/dashboard" />;
+	}
 
-  return (
-    <motion.div
-      variants={loginRouteTransition}
-      initial="hidden"
-      animate="show"
-      exit="exit"
-      className="outer-div"
-    >
-      <div
-        style={{
-          backgroundColor: "rgb(236, 220, 186)",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
-        }}
-      >
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <div>
-            <Typography component="h1" variant="h4">
-              Plan your projects
-            </Typography>
-            <br></br>
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
-            <form onSubmit={(e) => onSubmit(e)}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                value={email}
-                onChange={(e) => onChange(e)}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => onChange(e)}
-              />
-              {/* <motion.div
+	return (
+		<motion.div
+			variants={loginRouteTransition}
+			initial="hidden"
+			animate="show"
+			exit="exit"
+			className="outer-div"
+		>
+			<div
+				style={{
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+					height: "80%",
+				}}
+			>
+				<Container component="main" maxWidth="xs">
+					<CssBaseline />
+					<div>
+						<div style={{ display: "flex", justifyContent: "center" }}>
+							<Typography component="h1" variant="h4">
+								Plan your projects
+							</Typography>
+						</div>
+						<br></br>
+						<div style={{ display: "flex", justifyContent: "center" }}>
+							<Typography component="h1" variant="h5">
+								Sign in
+							</Typography>
+						</div>
+						<form onSubmit={(e) => onSubmit(e)}>
+							<TextField
+								variant="outlined"
+								margin="normal"
+								required
+								fullWidth
+								label="Email Address"
+								name="email"
+								autoComplete="email"
+								autoFocus
+								value={email}
+								onChange={(e) => onChange(e)}
+							/>
+							<TextField
+								variant="outlined"
+								margin="normal"
+								required
+								fullWidth
+								name="password"
+								label="Password"
+								type="password"
+								autoComplete="current-password"
+								value={password}
+								onChange={(e) => onChange(e)}
+							/>
+							{/* <motion.div
                 className="animatable"
                 whileHover={{
                   scale: 1.2,
@@ -105,28 +108,28 @@ const Login = () => {
                 }}
                 whileTap={{ scale: 0.9 }}
               > */}
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-              >
-                Sign In
-              </Button>
-              {/* </motion.div> */}
-              <Grid container justify="flex-end">
-                <Grid item>
-                  <Link href="/register" variant="body2">
-                    Don't have an account? Sign Up
-                  </Link>
-                </Grid>
-              </Grid>
-            </form>
-          </div>
-        </Container>
-      </div>
-    </motion.div>
-  );
+							<Button
+								type="submit"
+								fullWidth
+								variant="contained"
+								color="primary"
+							>
+								Sign In
+							</Button>
+							{/* </motion.div> */}
+							<Grid container justify="flex-end">
+								<Grid item>
+									<Link href="/register" variant="body2">
+										Don't have an account? Sign Up
+									</Link>
+								</Grid>
+							</Grid>
+						</form>
+					</div>
+				</Container>
+			</div>
+		</motion.div>
+	);
 };
 
 export default Login;
