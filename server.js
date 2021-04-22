@@ -41,8 +41,6 @@ app.use("/api/boards", boardsController);
 app.use("/api/cards", cardsController);
 app.use("/api/lists", listsController);
 
-const __dirname = path.resolve();
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));
 
